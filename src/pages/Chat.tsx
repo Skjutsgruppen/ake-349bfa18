@@ -41,6 +41,37 @@ const Chat = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handleAnalysisClick = () => {
+    setIsLoading(true);
+    
+    // First, add a user action message
+    const userMessage: Message = {
+      role: 'user',
+      content: 'Visa min reseanalys.'
+    };
+    
+    setMessages([userMessage]);
+    
+    // Then simulate a delay before assistant response
+    setTimeout(() => {
+      const analysisMessage: Message = {
+        role: 'assistant',
+        content: `Jag har med din tillåtelse analyserat ditt resemönster de senaste två månaderna. Det här har jag kommit fram till så här långt:
+
+- Lennart som är medlem i Svenska Turistföreningen har fyllt i att han jobbar på Schenker i Torslanda, som är nära ditt jobb. Han bor också i Borås och pendlar till Torslanda liknande tider som dig. Här finns potential för samåkning.
+
+- Du brukar mathandla på tisdagar. Två av dina grannar mathandlar en timme senare än dig, också på tisdagar. Även här finns potential för samåkning.
+
+- Eftersom du jobbar i skift kan du vissa dagar komma till jobbet med en kombination av Linje 100, Styr & Ställ och samåkning.
+
+Vill du att vi går vidare med någon av dessa?`
+      };
+      
+      setMessages(prevMessages => [...prevMessages, analysisMessage]);
+      setIsLoading(false);
+    }, 1000);
+  };
+
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) {
       toast({
@@ -113,7 +144,7 @@ const Chat = () => {
                 <h1 className="mb-8 text-4xl font-semibold text-center">Hej {userName}!</h1>
                 <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
               </div>
-              <ActionButtons />
+              <ActionButtons onAnalysisClick={handleAnalysisClick} />
             </div>
           ) : (
             <>
