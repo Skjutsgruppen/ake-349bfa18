@@ -7,6 +7,7 @@ import ChatInput from '@/components/ChatInput';
 import ActionButtons from '@/components/ActionButtons';
 import MessageList from '@/components/MessageList';
 import TravelOption from '@/components/TravelOption';
+import StepByStepRoute from '@/components/StepByStepRoute';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -194,16 +195,14 @@ Vill du att vi går vidare med någon av dessa?`
     setTimeout(() => {
       const toHomeMessage: Message = {
         role: 'assistant',
-        content: `Jag ser att du befinner dig vid Bollebygd station och vill åka hem till Orkestervägen i Borås. Här är ett kombinationsalternativ:
-
-1. Gå 5 minuter till Bollebygd Centrum (350m)
-2. Ta buss 101 mot Borås kl 19:15
-3. Byt vid Borås Resecentrum till samåkning med Erika som kör till Sjöbo kl 19:45
-4. Promenad sista 400m till Orkestervägen (5 min)`
+        content: `Jag ser att du befinner dig vid Bollebygd station och vill åka hem till Orkestervägen i Borås. Här är ett kombinationsalternativ:`
       };
       
       setMessages(prevMessages => [...prevMessages, toHomeMessage]);
       setIsLoading(false);
+      
+      // Show the route steps UI
+      setShowRouteSteps(true);
     }, 1000);
   };
 
@@ -262,6 +261,29 @@ Vill du att vi går vidare med någon av dessa?`
       setIsLoading(false);
     }
   };
+
+  // Add a new state variable for route steps
+  const [showRouteSteps, setShowRouteSteps] = useState(false);
+  
+  // Define the steps for the route
+  const routeSteps = [
+    {
+      type: 'walk' as const,
+      description: 'Gå 5 minuter till Bollebygd Centrum (350m)'
+    },
+    {
+      type: 'bus' as const,
+      description: 'Ta buss 101 mot Borås kl 19:15'
+    },
+    {
+      type: 'carpool' as const,
+      description: 'Byt vid Borås Resecentrum till samåkning med Erika som kör till Sjöbo kl 19:45'
+    },
+    {
+      type: 'walk' as const,
+      description: 'Promenad sista 400m till Orkestervägen (5 min)'
+    }
+  ];
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -339,6 +361,12 @@ Vill du att vi går vidare med någon av dessa?`
                         </button>
                       </div>
                     </div>
+                  </div>
+                )}
+                
+                {showRouteSteps && (
+                  <div className="w-full max-w-3xl mx-auto px-4 py-4">
+                    <StepByStepRoute steps={routeSteps} />
                   </div>
                 )}
               </div>
