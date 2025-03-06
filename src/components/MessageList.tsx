@@ -48,8 +48,19 @@ const MessageList = ({
     <div className="flex-1 overflow-y-auto">
       <div className="w-full max-w-3xl mx-auto px-4">
         {messages.map((message, index) => {
+          // Check if this is the last assistant message to show the route steps and combination route
+          const isLastAssistantMessage = message.role === 'assistant' && 
+            index === messages.filter(m => m.role === 'assistant').length - 1;
+          
           return (
-            <Message key={index} {...message} />
+            <Message 
+              key={index} 
+              {...message} 
+              showRouteSteps={isLastAssistantMessage && showRouteSteps}
+              showCombinationRoute={isLastAssistantMessage && showCombinationRoute}
+              routeSteps={routeSteps}
+              combinationSteps={combinationSteps}
+            />
           );
         })}
 
@@ -103,24 +114,6 @@ const MessageList = ({
         {showCalendarInfo && (
           <div className="ml-12 mb-4">
             <CalendarInfo />
-          </div>
-        )}
-        
-        {showRouteSteps && (
-          <div className="ml-12 mb-4">
-            <StepByStepRoute steps={routeSteps || []} />
-          </div>
-        )}
-
-        {showCombinationRoute && (
-          <div className="ml-12 mb-4">
-            <h3 className="text-xl font-medium mb-4">Här är ett kombinationsalternativ:</h3>
-            <CombinationRoute steps={combinationSteps?.map(step => ({
-              type: step.type,
-              title: step.title,
-              description: step.description,
-              mapUrl: step.mapUrl
-            })) || []} />
           </div>
         )}
       </div>

@@ -1,13 +1,25 @@
 
 import MessageAvatar from './MessageAvatar';
 import MessageActions from './MessageActions';
+import StepByStepRoute from './StepByStepRoute';
+import CombinationRoute from './CombinationRoute';
+import { Message as MessageType } from '@/hooks/useChat';
 
-type MessageProps = {
-  role: 'user' | 'assistant';
-  content: string;
-};
+interface MessageProps extends MessageType {
+  showRouteSteps?: boolean;
+  showCombinationRoute?: boolean;
+  routeSteps?: any[];
+  combinationSteps?: any[];
+}
 
-const Message = ({ role, content }: MessageProps) => {
+const Message = ({ 
+  role, 
+  content, 
+  showRouteSteps, 
+  showCombinationRoute,
+  routeSteps,
+  combinationSteps
+}: MessageProps) => {
   const formatContent = (text: string) => {
     const lines = text.split('\n');
     
@@ -35,6 +47,20 @@ const Message = ({ role, content }: MessageProps) => {
             <div className="message-content">
               {formatContent(content)}
             </div>
+            
+            {role === 'assistant' && showRouteSteps && routeSteps && (
+              <div className="mt-4">
+                <StepByStepRoute steps={routeSteps} />
+              </div>
+            )}
+            
+            {role === 'assistant' && showCombinationRoute && combinationSteps && (
+              <div className="mt-4">
+                <h3 className="text-xl font-medium mb-4">Här är ett kombinationsalternativ:</h3>
+                <CombinationRoute steps={combinationSteps} />
+              </div>
+            )}
+            
             {role === 'assistant' && <MessageActions />}
           </div>
         </div>
