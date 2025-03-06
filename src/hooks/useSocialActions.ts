@@ -22,7 +22,7 @@ export const useSocialActions = ({
     
     const userMessage: Message = {
       role: 'user',
-      content: 'Visa mig föreningsaktiviterer'
+      content: 'Visa mig föreningsaktiviteter'
     };
     
     setMessages([userMessage]);
