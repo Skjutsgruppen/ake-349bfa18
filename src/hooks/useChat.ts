@@ -6,6 +6,7 @@ export type Message = {
   role: 'user' | 'assistant';
   content: string;
   includeRouteSteps?: boolean;
+  showActionButtons?: boolean;
 };
 
 export const useChat = () => {
@@ -52,28 +53,35 @@ export const useChat = () => {
 
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      let response = "Jag är bara en prototyp än så länge, så jag kan inte chatta längre än så här";
+      let response = "Jag är bara en prototyp än så länge, så jag är lite begränsad i mina svar. Här är några saker du kan pröva:";
       let includeRouteSteps = false;
+      let showActionButtons = true;
       
       if (awaitingSeatsInput) {
         response = "Vill du erbjuda platser din vanligaste sträcka, från hemmet till jobbet?";
         setAwaitingSeatsInput(false);
+        showActionButtons = false;
       } else if (content.toLowerCase().includes("samåk") || content.toLowerCase().includes("skjuts")) {
         response = "Vi har flera samåkningsmöjligheter från Skjutsgruppen! Det finns resor mellan Göteborg och Stockholm på fredag. Vill du veta mer om tillgängliga samåkningsalternativ?";
+        showActionButtons = false;
       } else if (content.toLowerCase().includes("buss") || content.toLowerCase().includes("spårvagn") || content.toLowerCase().includes("västtrafik")) {
         response = "Västtrafik har flera avgångar som kan passa dig. Buss 16 avgår var 10:e minut från centralen. Vill du se hela tidtabellen?";
+        showActionButtons = false;
       } else if (content.toLowerCase().includes("kombination") || content.toLowerCase().includes("både och")) {
         response = "För en kombinerad resa rekommenderar jag att ta samåkning till Korsvägen och sedan buss 50 till ditt slutmål. Detta sparar både tid och pengar samtidigt som det minskar miljöpåverkan!";
         includeRouteSteps = true;
         setShowCombinationRoute(true);
+        showActionButtons = false;
       } else if (content.toLowerCase().includes("hej") || content.toLowerCase().includes("hallå")) {
         response = `Hej! Jag är Åke, din reseassistent. Jag kan hjälpa dig med både kollektivtrafik via Västtrafik och samåkning via Skjutsgruppen. Vad behöver du hjälp med idag?`;
+        showActionButtons = false;
       }
 
       const assistantMessage: Message = {
         role: 'assistant',
         content: response,
-        includeRouteSteps
+        includeRouteSteps,
+        showActionButtons
       };
 
       setMessages([...newMessages, assistantMessage]);

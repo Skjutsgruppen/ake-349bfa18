@@ -2,14 +2,36 @@
 import MessageAvatar from './MessageAvatar';
 import MessageActions from './MessageActions';
 import StepByStepRoute from './StepByStepRoute';
+import ActionButtons from './ActionButtons';
+import { useActionHandlers } from '@/hooks/useActionHandlers';
 
 type MessageProps = {
   role: 'user' | 'assistant';
   content: string;
   includeRouteSteps?: boolean;
+  showActionButtons?: boolean;
 };
 
-const Message = ({ role, content, includeRouteSteps }: MessageProps) => {
+const Message = ({ role, content, includeRouteSteps, showActionButtons }: MessageProps) => {
+  // Get action handlers
+  const { 
+    handleAnalysisClick,
+    handleOfferSeatClick,
+    handleToWorkClick,
+    handleFromHereClick,
+    handleAssociationActivityClick,
+    handleToHomeClick
+  } = useActionHandlers({
+    setMessages: () => {},
+    setIsLoading: () => {},
+    setAwaitingSeatsInput: () => {},
+    setShowTravelOptions: () => {},
+    setShowAssociationMap: () => {},
+    setShowRouteSteps: () => {},
+    setShowCombinationRoute: () => {},
+    setShowCalendarInfo: () => {}
+  });
+
   // Define the steps for the route
   const routeSteps = [{
     type: 'walk' as const,
@@ -61,6 +83,16 @@ const Message = ({ role, content, includeRouteSteps }: MessageProps) => {
                   <div className="mt-4">
                     <StepByStepRoute steps={routeSteps} />
                   </div>
+                )}
+                {showActionButtons && (
+                  <ActionButtons 
+                    onAnalysisClick={handleAnalysisClick}
+                    onOfferSeatClick={handleOfferSeatClick}
+                    onToWorkClick={handleToWorkClick}
+                    onFromHereClick={handleFromHereClick}
+                    onAssociationActivityClick={handleAssociationActivityClick}
+                    onToHomeClick={handleToHomeClick}
+                  />
                 )}
               </div>
             ) : (

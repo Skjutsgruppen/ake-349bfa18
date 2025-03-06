@@ -5,6 +5,7 @@ type Message = {
   role: 'user' | 'assistant';
   content: string;
   includeRouteSteps?: boolean;
+  showActionButtons?: boolean;
 };
 
 const MessageList = ({ messages }: { messages: Message[] }) => {
