@@ -13,10 +13,10 @@ const Welcome = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!name.trim() || name.length > 10) {
+    if (!name.trim() || name.length > 11) {
       toast({
         title: "Fel",
-        description: "Vänligen ange ett namn med max 10 tecken",
+        description: "Vänligen ange ett namn med max 11 tecken",
         variant: "destructive"
       });
       return;
@@ -45,7 +45,7 @@ const Welcome = () => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              maxLength={10}
+              maxLength={11}
               placeholder="Ange förnamn"
               className="rounded-xl bg-[#3A3B42] border-gray-700 text-white text-base"
               required
