@@ -1,15 +1,14 @@
+import { useState, useEffect } from 'react';
 
-import { useEffect, useState } from 'react';
-import { Message } from './useChat';
-
-type ActionHandlersProps = {
-  setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setAwaitingSeatsInput: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowTravelOptions: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowAssociationMap: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowRouteSteps: React.Dispatch<React.SetStateAction<boolean>>;
-};
+interface ActionHandlersProps {
+  setMessages: (messages: any[]) => void;
+  setIsLoading: (isLoading: boolean) => void;
+  setAwaitingSeatsInput: (awaiting: boolean) => void;
+  setShowTravelOptions: (show: boolean) => void;
+  setShowAssociationMap: (show: boolean) => void;
+  setShowRouteSteps: (show: boolean) => void;
+  setShowCombinationRoute: (show: boolean) => void;
+}
 
 export const useActionHandlers = ({
   setMessages,
@@ -17,10 +16,11 @@ export const useActionHandlers = ({
   setAwaitingSeatsInput,
   setShowTravelOptions,
   setShowAssociationMap,
-  setShowRouteSteps
+  setShowRouteSteps,
+  setShowCombinationRoute
 }: ActionHandlersProps) => {
   const [userName, setUserName] = useState('');
-  
+
   useEffect(() => {
     const savedName = localStorage.getItem('userName');
     if (savedName) {

@@ -3,6 +3,7 @@ import React from 'react';
 import MessageList from './MessageList';
 import TravelOption from './TravelOption';
 import StepByStepRoute from './StepByStepRoute';
+import CombinationRoute from './CombinationRoute';
 import ChatInput from './ChatInput';
 import { Message } from '@/hooks/useChat';
 
@@ -17,6 +18,7 @@ interface ChatContentProps {
   showTravelOptions: boolean;
   showAssociationMap: boolean;
   showRouteSteps: boolean;
+  showCombinationRoute: boolean;
   onSendMessage: (message: string) => void;
 }
 
@@ -26,6 +28,7 @@ const ChatContent: React.FC<ChatContentProps> = ({
   showTravelOptions,
   showAssociationMap,
   showRouteSteps,
+  showCombinationRoute,
   onSendMessage
 }) => {
   // Define the steps for the route
@@ -45,6 +48,25 @@ const ChatContent: React.FC<ChatContentProps> = ({
     {
       type: 'walk' as const,
       description: 'Promenad sista 400m till Orkestervägen (5 min)'
+    }
+  ];
+
+  // Define the steps for the combination route
+  const combinationSteps = [
+    {
+      type: 'walk' as const,
+      title: 'Promenad till busshållplats',
+      description: 'Gå 5 minuter till Korsvägen (350m)'
+    },
+    {
+      type: 'bus' as const,
+      title: 'Buss 50 mot Centrum',
+      description: 'Avgår 08:15, ankomst Brunnsparken 08:30'
+    },
+    {
+      type: 'carpool' as const,
+      title: 'Samåkning med Johan',
+      description: 'Möt vid Brunnsparken kl 08:40, framme vid arbetsplatsen 09:00'
     }
   ];
 
@@ -102,6 +124,13 @@ const ChatContent: React.FC<ChatContentProps> = ({
         {showRouteSteps && (
           <div className="w-full max-w-3xl mx-auto px-4 py-4">
             <StepByStepRoute steps={routeSteps} />
+          </div>
+        )}
+
+        {showCombinationRoute && (
+          <div className="w-full max-w-3xl mx-auto px-4 py-4">
+            <h3 className="text-xl font-medium mb-4 text-center">Här är ett kombinationsalternativ:</h3>
+            <CombinationRoute steps={combinationSteps} />
           </div>
         )}
       </div>

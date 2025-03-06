@@ -14,6 +14,7 @@ export const useChat = () => {
   const [showTravelOptions, setShowTravelOptions] = useState(false);
   const [showAssociationMap, setShowAssociationMap] = useState(false);
   const [showRouteSteps, setShowRouteSteps] = useState(false);
+  const [showCombinationRoute, setShowCombinationRoute] = useState(false);
   const { toast } = useToast();
 
   const resetChat = () => {
@@ -23,6 +24,7 @@ export const useChat = () => {
     setShowTravelOptions(false);
     setShowAssociationMap(false);
     setShowRouteSteps(false);
+    setShowCombinationRoute(false);
   };
 
   const handleSendMessage = async (content: string) => {
@@ -58,6 +60,7 @@ export const useChat = () => {
         response = "Västtrafik har flera avgångar som kan passa dig. Buss 16 avgår var 10:e minut från centralen. Vill du se hela tidtabellen?";
       } else if (content.toLowerCase().includes("kombination") || content.toLowerCase().includes("både och")) {
         response = "För en kombinerad resa rekommenderar jag att ta samåkning till Korsvägen och sedan buss 50 till ditt slutmål. Detta sparar både tid och pengar samtidigt som det minskar miljöpåverkan!";
+        setShowCombinationRoute(true);
       } else if (content.toLowerCase().includes("hej") || content.toLowerCase().includes("hallå")) {
         response = `Hej! Jag är Åke, din reseassistent. Jag kan hjälpa dig med både kollektivtrafik via Västtrafik och samåkning via Skjutsgruppen. Vad behöver du hjälp med idag?`;
       }
@@ -88,12 +91,14 @@ export const useChat = () => {
     showTravelOptions,
     showAssociationMap,
     showRouteSteps,
+    showCombinationRoute,
     setMessages,
     setIsLoading,
     setAwaitingSeatsInput,
     setShowTravelOptions,
     setShowAssociationMap,
     setShowRouteSteps,
+    setShowCombinationRoute,
     resetChat,
     handleSendMessage
   };
