@@ -17,7 +17,7 @@ const CombinationRoute: React.FC<CombinationRouteProps> = ({ steps }) => {
   return (
     <div className="flex flex-col items-center w-full max-w-md mx-auto mt-4 mb-6">
       {steps.map((step, index) => (
-        <React.Fragment key={index}>
+        <div key={index} className="w-full relative">
           <TravelOption 
             type={step.type} 
             title={step.title} 
@@ -26,10 +26,14 @@ const CombinationRoute: React.FC<CombinationRouteProps> = ({ steps }) => {
           />
           
           {index < steps.length - 1 && (
-            <div className="h-8 border-l-2 border-dashed border-gray-500 my-1"></div>
+            <div className="absolute left-[22px] top-full h-8 border-l-2 border-dashed border-gray-500"></div>
           )}
-        </React.Fragment>
+        </div>
       ))}
+      
+      <div className="mt-6 text-center">
+        <p className="text-lg font-medium">Vill du att jag planerar denna resa med dig?</p>
+      </div>
     </div>
   );
 };
