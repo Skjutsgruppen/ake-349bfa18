@@ -1,7 +1,9 @@
+
 import { useState, useEffect } from 'react';
+import { Message } from '@/hooks/useChat';
 
 interface ActionHandlersProps {
-  setMessages: (messages: any[]) => void;
+  setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
   setIsLoading: (isLoading: boolean) => void;
   setAwaitingSeatsInput: (awaiting: boolean) => void;
   setShowTravelOptions: (show: boolean) => void;
