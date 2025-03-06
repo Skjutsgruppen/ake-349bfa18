@@ -26,9 +26,9 @@ const StepByStepRoute: React.FC<StepByStepRouteProps> = ({ steps }) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full max-w-md mx-auto mt-4 mb-6">
+    <div className="flex flex-col items-start w-full max-w-md mx-auto mt-4 mb-6">
       {steps.map((step, index) => (
-        <div key={index} className="w-full relative">
+        <div key={index} className="w-full relative mb-8 last:mb-0">
           <div className="bg-gray-800/50 rounded-lg p-4 w-full">
             <div className="flex items-center">
               {getIcon(step.type)}
@@ -41,10 +41,6 @@ const StepByStepRoute: React.FC<StepByStepRouteProps> = ({ steps }) => {
           )}
         </div>
       ))}
-      
-      <div className="mt-6 text-center">
-        <p className="text-lg font-medium">Vill du att jag planerar denna resa med dig?</p>
-      </div>
     </div>
   );
 };
