@@ -3,11 +3,16 @@ import { Car, MapPin, Briefcase, Home, Users, Sparkles } from "lucide-react";
 
 interface ActionButtonsProps {
   onAnalysisClick: () => void;
+  onOfferSeatClick: () => void;
 }
 
-const ActionButtons = ({ onAnalysisClick }: ActionButtonsProps) => {
+const ActionButtons = ({ onAnalysisClick, onOfferSeatClick }: ActionButtonsProps) => {
   const actions = [
-    { icon: <Car className="h-4 w-4 text-purple-400" />, label: "Erbjud plats" },
+    { 
+      icon: <Car className="h-4 w-4 text-purple-400" />, 
+      label: "Erbjud plats",
+      onClick: onOfferSeatClick
+    },
     { icon: <MapPin className="h-4 w-4 text-red-400" />, label: "Härifrån" },
     { icon: <Users className="h-4 w-4 text-blue-400" />, label: "Föreningsaktivitet" },
     { icon: <Briefcase className="h-4 w-4 text-green-400" />, label: "Till jobbet" },

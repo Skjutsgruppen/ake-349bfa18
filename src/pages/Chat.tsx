@@ -18,6 +18,7 @@ const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [userName, setUserName] = useState('');
+  const [awaitingSeatsInput, setAwaitingSeatsInput] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -35,10 +36,35 @@ const Chat = () => {
   const resetChat = () => {
     console.log("Reset chat triggered");
     setMessages([]);
+    setAwaitingSeatsInput(false);
   };
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleOfferSeatClick = () => {
+    setIsLoading(true);
+    
+    // Add a user action message
+    const userMessage: Message = {
+      role: 'user',
+      content: 'Jag vill erbjuda platser i min bil.'
+    };
+    
+    setMessages([userMessage]);
+    
+    // Simulate a delay before assistant response
+    setTimeout(() => {
+      const assistantMessage: Message = {
+        role: 'assistant',
+        content: 'Hur många lediga platser har du?'
+      };
+      
+      setMessages(prevMessages => [...prevMessages, assistantMessage]);
+      setIsLoading(false);
+      setAwaitingSeatsInput(true);
+    }, 1000);
   };
 
   const handleAnalysisClick = () => {
@@ -95,10 +121,13 @@ Vill du att vi går vidare med någon av dessa?`
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Generate a response based on the user's message
       let response = "Jag förstår inte riktigt din fråga. Kan du försöka omformulera den?";
       
-      if (content.toLowerCase().includes("samåk") || content.toLowerCase().includes("skjuts")) {
+      // Handle continuation of "Erbjud plats" flow
+      if (awaitingSeatsInput) {
+        response = "Vill du erbjuda platser din vanligaste sträcka, från hemmet till jobbet?";
+        setAwaitingSeatsInput(false);
+      } else if (content.toLowerCase().includes("samåk") || content.toLowerCase().includes("skjuts")) {
         response = "Vi har flera samåkningsmöjligheter från Skjutsgruppen! Det finns resor mellan Göteborg och Stockholm på fredag. Vill du veta mer om tillgängliga samåkningsalternativ?";
       } else if (content.toLowerCase().includes("buss") || content.toLowerCase().includes("spårvagn") || content.toLowerCase().includes("västtrafik")) {
         response = "Västtrafik har flera avgångar som kan passa dig. Buss 16 avgår var 10:e minut från centralen. Vill du se hela tidtabellen?";
@@ -144,7 +173,10 @@ Vill du att vi går vidare med någon av dessa?`
                 <h1 className="mb-8 text-4xl font-semibold text-center">Hej {userName}!</h1>
                 <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
               </div>
-              <ActionButtons onAnalysisClick={handleAnalysisClick} />
+              <ActionButtons 
+                onAnalysisClick={handleAnalysisClick} 
+                onOfferSeatClick={handleOfferSeatClick}
+              />
             </div>
           ) : (
             <>
