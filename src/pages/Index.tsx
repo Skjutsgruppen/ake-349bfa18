@@ -18,6 +18,11 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
+  const resetChat = () => {
+    console.log("Reset chat triggered from Index");
+    setMessages([]);
+  };
+
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) {
       toast({
@@ -76,11 +81,12 @@ const Index = () => {
       <Sidebar 
         isOpen={isSidebarOpen} 
         onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
-        onApiKeyChange={() => {}} // Empty function since we don't need API key anymore
+        onApiKeyChange={() => {}} 
+        resetChat={resetChat}
       />
       
       <main className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
-        <ChatHeader isSidebarOpen={isSidebarOpen} />
+        <ChatHeader isSidebarOpen={isSidebarOpen} resetChat={resetChat} />
         
         <div className={`flex h-full flex-col ${messages.length === 0 ? 'items-center justify-center' : 'justify-between'} pt-[60px] pb-4`}>
           {messages.length === 0 ? (
