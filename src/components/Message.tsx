@@ -93,6 +93,7 @@ const Message = ({ role, content, includeRouteSteps, showActionButtons }: Messag
                     onAssociationActivityClick={handleAssociationActivityClick}
                     onToHomeClick={handleToHomeClick}
                     className="mt-6" // Add extra margin at the top
+                    alignment="start" // Left alignment for chat message buttons
                   />
                 )}
               </div>

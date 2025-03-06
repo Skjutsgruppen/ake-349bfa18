@@ -9,6 +9,7 @@ interface ActionButtonsProps {
   onAssociationActivityClick?: () => void;
   onToHomeClick?: () => void;
   className?: string;
+  alignment?: 'start' | 'center'; // New prop for alignment
 }
 
 const ActionButtons = ({ 
@@ -18,7 +19,8 @@ const ActionButtons = ({
   onFromHereClick,
   onAssociationActivityClick,
   onToHomeClick,
-  className = ""
+  className = "",
+  alignment = 'start' // Default to start alignment
 }: ActionButtonsProps) => {
   const actions = [
     { 
@@ -54,7 +56,7 @@ const ActionButtons = ({
   ];
 
   return (
-    <div className={`flex gap-2 flex-wrap justify-start mt-4 ${className}`}>
+    <div className={`flex gap-2 flex-wrap justify-${alignment} mt-4 ${className}`}>
       {actions.map((action) => (
         <button 
           key={action.label} 

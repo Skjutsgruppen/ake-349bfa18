@@ -39,6 +39,7 @@ const WelcomeView: React.FC<WelcomeViewProps> = ({
         onFromHereClick={onFromHereClick}
         onAssociationActivityClick={onAssociationActivityClick}
         onToHomeClick={onToHomeClick}
+        alignment="center" // Center alignment for welcome page
       />
     </div>
   );

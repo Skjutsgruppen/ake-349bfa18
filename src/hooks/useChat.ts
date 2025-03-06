@@ -74,7 +74,7 @@ export const useChat = () => {
         showActionButtons = false;
       } else if (content.toLowerCase().includes("hej") || content.toLowerCase().includes("hallå")) {
         response = `Hej! Jag är Åke, din reseassistent. Jag kan hjälpa dig med både kollektivtrafik via Västtrafik och samåkning via Skjutsgruppen. Vad behöver du hjälp med idag?`;
-        showActionButtons = false;
+        showActionButtons = true; // Show buttons for greeting
       }
 
       const assistantMessage: Message = {
