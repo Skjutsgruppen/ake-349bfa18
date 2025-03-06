@@ -52,7 +52,7 @@ const ActionButtons = ({
   ];
 
   return (
-    <div className="flex gap-2 flex-wrap justify-start">
+    <div className="flex gap-2 flex-wrap justify-center mt-4">
       {actions.map((action) => (
         <button 
           key={action.label} 
