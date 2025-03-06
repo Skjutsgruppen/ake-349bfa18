@@ -1,15 +1,12 @@
+
 import React from 'react';
 import MessageList from './MessageList';
 import TravelOption from './TravelOption';
-import StepByStepRoute from './StepByStepRoute';
 import CombinationRoute from './CombinationRoute';
 import CalendarInfo from './CalendarInfo';
 import ChatInput from './ChatInput';
 import { Message } from '@/hooks/useChat';
-type TransportStep = {
-  type: 'walk' | 'bus' | 'carpool';
-  description: string;
-};
+
 interface ChatContentProps {
   messages: Message[];
   isLoading: boolean;
@@ -20,31 +17,16 @@ interface ChatContentProps {
   showCalendarInfo: boolean;
   onSendMessage: (message: string) => void;
 }
+
 const ChatContent: React.FC<ChatContentProps> = ({
   messages,
   isLoading,
   showTravelOptions,
   showAssociationMap,
-  showRouteSteps,
-  showCombinationRoute,
   showCalendarInfo,
+  showCombinationRoute,
   onSendMessage
 }) => {
-  // Define the steps for the route
-  const routeSteps = [{
-    type: 'walk' as const,
-    description: 'Gå 5 minuter till Bollebygd Centrum (350m)'
-  }, {
-    type: 'bus' as const,
-    description: 'Ta buss 101 mot Borås kl 19:15'
-  }, {
-    type: 'carpool' as const,
-    description: 'Byt vid Borås Resecentrum till samåkning med Erika som kör till Sjöbo kl 19:45'
-  }, {
-    type: 'walk' as const,
-    description: 'Promenad sista 400m till Orkestervägen (5 min)'
-  }];
-
   // Define the steps for the combination route
   const combinationSteps = [{
     type: 'walk' as const,
@@ -59,6 +41,7 @@ const ChatContent: React.FC<ChatContentProps> = ({
     title: 'Samåkning med Johan',
     description: 'Möt vid Brunnsparken kl 08:40, framme vid arbetsplatsen 09:00'
   }];
+
   return <>
       <div className="flex-1 overflow-y-auto">
         <MessageList messages={messages} />
@@ -89,10 +72,6 @@ const ChatContent: React.FC<ChatContentProps> = ({
         {showCalendarInfo && <div className="w-full max-w-3xl mx-auto px-4 py-4">
             <CalendarInfo />
           </div>}
-        
-        {showRouteSteps && <div className="w-full max-w-3xl mx-auto py-4 px-0">
-            <StepByStepRoute steps={routeSteps} />
-          </div>}
 
         {showCombinationRoute && <div className="w-full max-w-3xl mx-auto px-4 py-4">
             <h3 className="text-xl font-medium mb-4 text-center">Här är ett kombinationsalternativ:</h3>
@@ -108,4 +87,5 @@ const ChatContent: React.FC<ChatContentProps> = ({
       </div>
     </>;
 };
+
 export default ChatContent;

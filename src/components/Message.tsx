@@ -1,13 +1,30 @@
 
 import MessageAvatar from './MessageAvatar';
 import MessageActions from './MessageActions';
+import StepByStepRoute from './StepByStepRoute';
 
 type MessageProps = {
   role: 'user' | 'assistant';
   content: string;
+  includeRouteSteps?: boolean;
 };
 
-const Message = ({ role, content }: MessageProps) => {
+const Message = ({ role, content, includeRouteSteps }: MessageProps) => {
+  // Define the steps for the route
+  const routeSteps = [{
+    type: 'walk' as const,
+    description: 'Gå 5 minuter till Bollebygd Centrum (350m)'
+  }, {
+    type: 'bus' as const,
+    description: 'Ta buss 101 mot Borås kl 19:15'
+  }, {
+    type: 'carpool' as const,
+    description: 'Byt vid Borås Resecentrum till samåkning med Erika som kör till Sjöbo kl 19:45'
+  }, {
+    type: 'walk' as const,
+    description: 'Promenad sista 400m till Orkestervägen (5 min)'
+  }];
+
   // Function to format message content with proper bullet points
   const formatContent = (text: string) => {
     // Split the text by newlines
@@ -40,6 +57,11 @@ const Message = ({ role, content }: MessageProps) => {
             {role === 'assistant' ? (
               <div className="message-content">
                 {formatContent(content)}
+                {includeRouteSteps && (
+                  <div className="mt-4">
+                    <StepByStepRoute steps={routeSteps} />
+                  </div>
+                )}
               </div>
             ) : (
               content

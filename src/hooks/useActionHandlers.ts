@@ -86,6 +86,7 @@ export const useActionHandlers = ({
     setIsLoading(true);
     setShowTravelOptions(false);
     setShowAssociationMap(false);
+    setShowRouteSteps(false);
     
     const userMessage: Message = {
       role: 'user',
@@ -97,17 +98,13 @@ export const useActionHandlers = ({
     setTimeout(() => {
       const fromHereMessage: Message = {
         role: 'assistant',
-        content: `Jag ser att du befinner dig vid Bollebygd station. Här är olika resealternativ:
-
-1. Buss 101 mot Landvetter avgår om 5 minuter från hållplats A
-2. X3 mot Göteborg avgår om 12 minuter från hållplats B
-3. Karin erbjuder samåkning till Borås med avgång om 15 minuter
-4. Cykelpool har 2 lediga elcyklar vid stationens norra entré
-5. Sven från Friluftsfrämjandet har plats i bilen till Ulricehamn med avgång kl 19.30`
+        content: `Jag ser att du befinner dig vid Bollebygd station och vill se resealternativ härifrån. Här är en rutt till Orkestervägen i Borås:`,
+        includeRouteSteps: true
       };
       
       setMessages(prevMessages => [...prevMessages, fromHereMessage]);
       setIsLoading(false);
+      setShowRouteSteps(true);
     }, 1000);
   };
 
@@ -181,13 +178,12 @@ Vill du att vi går vidare med någon av dessa?`
     setTimeout(() => {
       const toHomeMessage: Message = {
         role: 'assistant',
-        content: `Jag ser att du befinner dig vid Bollebygd station och vill åka hem till Orkestervägen i Borås. Här är ett kombinationsalternativ:`
+        content: `Jag ser att du befinner dig vid Bollebygd station och vill åka hem till Orkestervägen i Borås. Här är ett kombinationsalternativ:`,
+        includeRouteSteps: true
       };
       
       setMessages(prevMessages => [...prevMessages, toHomeMessage]);
       setIsLoading(false);
-      
-      // Show the route steps UI
       setShowRouteSteps(true);
     }, 1000);
   };

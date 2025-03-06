@@ -1,8 +1,10 @@
+
 import Message from './Message';
 
 type Message = {
   role: 'user' | 'assistant';
   content: string;
+  includeRouteSteps?: boolean;
 };
 
 const MessageList = ({ messages }: { messages: Message[] }) => {

@@ -1,9 +1,11 @@
+
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 export type Message = {
   role: 'user' | 'assistant';
   content: string;
+  includeRouteSteps?: boolean;
 };
 
 export const useChat = () => {
@@ -51,6 +53,7 @@ export const useChat = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       let response = "Jag är bara en prototyp än så länge, så jag kan inte chatta längre än så här";
+      let includeRouteSteps = false;
       
       if (awaitingSeatsInput) {
         response = "Vill du erbjuda platser din vanligaste sträcka, från hemmet till jobbet?";
@@ -61,6 +64,7 @@ export const useChat = () => {
         response = "Västtrafik har flera avgångar som kan passa dig. Buss 16 avgår var 10:e minut från centralen. Vill du se hela tidtabellen?";
       } else if (content.toLowerCase().includes("kombination") || content.toLowerCase().includes("både och")) {
         response = "För en kombinerad resa rekommenderar jag att ta samåkning till Korsvägen och sedan buss 50 till ditt slutmål. Detta sparar både tid och pengar samtidigt som det minskar miljöpåverkan!";
+        includeRouteSteps = true;
         setShowCombinationRoute(true);
       } else if (content.toLowerCase().includes("hej") || content.toLowerCase().includes("hallå")) {
         response = `Hej! Jag är Åke, din reseassistent. Jag kan hjälpa dig med både kollektivtrafik via Västtrafik och samåkning via Skjutsgruppen. Vad behöver du hjälp med idag?`;
@@ -68,7 +72,8 @@ export const useChat = () => {
 
       const assistantMessage: Message = {
         role: 'assistant',
-        content: response
+        content: response,
+        includeRouteSteps
       };
 
       setMessages([...newMessages, assistantMessage]);
