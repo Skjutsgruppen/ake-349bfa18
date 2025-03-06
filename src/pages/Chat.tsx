@@ -31,6 +31,11 @@ const Chat = () => {
     }
   }, [navigate]);
 
+  // Reset messages and return to the start page
+  const resetChat = () => {
+    setMessages([]);
+  };
+
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) {
       toast({

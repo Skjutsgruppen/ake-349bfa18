@@ -18,7 +18,8 @@ const ChatHeader = ({ isSidebarOpen = true }: ChatHeaderProps) => {
     }
   }, []);
 
-  const handleLogoClick = () => {
+  const handleNavigation = () => {
+    // Navigate to chat which will show the start page if messages are empty
     navigate('/chat');
   };
 
@@ -27,11 +28,11 @@ const ChatHeader = ({ isSidebarOpen = true }: ChatHeaderProps) => {
       <div className="flex h-[60px] items-center justify-between px-4">
         <div className="flex items-center gap-2">
           {isSidebarOpen && (
-            <Menu className="h-5 w-5 cursor-pointer" />
+            <Menu className="h-5 w-5 cursor-pointer" onClick={handleNavigation} />
           )}
           <span 
             className={`font-semibold cursor-pointer ${!isSidebarOpen ? 'ml-24' : ''}`}
-            onClick={handleLogoClick}
+            onClick={handleNavigation}
           >
             Åke
           </span>
