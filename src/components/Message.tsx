@@ -92,6 +92,7 @@ const Message = ({ role, content, includeRouteSteps, showActionButtons }: Messag
                     onFromHereClick={handleFromHereClick}
                     onAssociationActivityClick={handleAssociationActivityClick}
                     onToHomeClick={handleToHomeClick}
+                    className="mt-6" // Add extra margin at the top
                   />
                 )}
               </div>
