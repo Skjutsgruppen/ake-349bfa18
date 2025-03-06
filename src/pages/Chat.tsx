@@ -49,7 +49,8 @@ const Chat = () => {
     setShowAssociationMap,
     setShowRouteSteps,
     setShowCombinationRoute,
-    setShowCalendarInfo
+    setShowCalendarInfo,
+    resetChat
   });
 
   useEffect(() => {
@@ -94,6 +95,12 @@ const Chat = () => {
               showCombinationRoute={showCombinationRoute}
               showCalendarInfo={showCalendarInfo}
               onSendMessage={handleSendMessage}
+              onAnalysisClick={handleAnalysisClick}
+              onOfferSeatClick={handleOfferSeatClick}
+              onToWorkClick={handleToWorkClick}
+              onFromHereClick={handleFromHereClick}
+              onAssociationActivityClick={handleAssociationActivityClick}
+              onToHomeClick={handleToHomeClick}
             />
           )}
         </div>

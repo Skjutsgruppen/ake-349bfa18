@@ -3,44 +3,33 @@ import MessageAvatar from './MessageAvatar';
 import MessageActions from './MessageActions';
 import StepByStepRoute from './StepByStepRoute';
 import ActionButtons from './ActionButtons';
-import { ActionHandlerProps } from '@/hooks/actionTypes';
-import { useTransportActions } from '@/hooks/useTransportActions';
-import { useLocationActions } from '@/hooks/useLocationActions';
-import { useAnalyticsActions } from '@/hooks/useAnalyticsActions';
-import { useSocialActions } from '@/hooks/useSocialActions';
-import { useChat } from '@/hooks/useChat';
 
 type MessageProps = {
   role: 'user' | 'assistant';
   content: string;
   includeRouteSteps?: boolean;
   showActionButtons?: boolean;
+  onAnalysisClick?: () => void;
+  onOfferSeatClick?: () => void;
+  onToWorkClick?: () => void;
+  onFromHereClick?: () => void;
+  onAssociationActivityClick?: () => void;
+  onToHomeClick?: () => void;
 };
 
-const Message = ({ role, content, includeRouteSteps, showActionButtons }: MessageProps) => {
-  // Get the reset function from useChat
-  const { resetChat, setMessages, setIsLoading, setAwaitingSeatsInput, setShowTravelOptions, 
-         setShowAssociationMap, setShowRouteSteps, setShowCombinationRoute, setShowCalendarInfo } = useChat();
+const Message = ({ 
+  role, 
+  content, 
+  includeRouteSteps, 
+  showActionButtons,
+  onAnalysisClick,
+  onOfferSeatClick,
+  onToWorkClick,
+  onFromHereClick,
+  onAssociationActivityClick,
+  onToHomeClick
+}: MessageProps) => {
   
-  // Define action props with the actual state setters from useChat
-  const actionProps: ActionHandlerProps = {
-    setMessages,
-    setIsLoading,
-    setAwaitingSeatsInput,
-    setShowTravelOptions,
-    setShowAssociationMap,
-    setShowRouteSteps,
-    setShowCombinationRoute,
-    setShowCalendarInfo,
-    resetChat
-  };
-
-  // Get action handlers with the updated props
-  const { handleOfferSeatClick, handleToWorkClick, handleToHomeClick } = useTransportActions(actionProps);
-  const { handleFromHereClick } = useLocationActions(actionProps);
-  const { handleAnalysisClick } = useAnalyticsActions(actionProps);
-  const { handleAssociationActivityClick } = useSocialActions(actionProps);
-
   // Define the steps for the route
   const routeSteps = [{
     type: 'walk' as const,
@@ -95,12 +84,12 @@ const Message = ({ role, content, includeRouteSteps, showActionButtons }: Messag
                 )}
                 {showActionButtons && (
                   <ActionButtons 
-                    onAnalysisClick={handleAnalysisClick}
-                    onOfferSeatClick={handleOfferSeatClick}
-                    onToWorkClick={handleToWorkClick}
-                    onFromHereClick={handleFromHereClick}
-                    onAssociationActivityClick={handleAssociationActivityClick}
-                    onToHomeClick={handleToHomeClick}
+                    onAnalysisClick={onAnalysisClick}
+                    onOfferSeatClick={onOfferSeatClick}
+                    onToWorkClick={onToWorkClick}
+                    onFromHereClick={onFromHereClick}
+                    onAssociationActivityClick={onAssociationActivityClick}
+                    onToHomeClick={onToHomeClick}
                     className="mt-6" // Add extra margin at the top
                     alignment="start" // Left alignment for chat message buttons
                   />

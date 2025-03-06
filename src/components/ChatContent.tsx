@@ -5,10 +5,10 @@ import TravelOption from './TravelOption';
 import CombinationRoute from './CombinationRoute';
 import CalendarInfo from './CalendarInfo';
 import ChatInput from './ChatInput';
-import { Message } from '@/hooks/useChat';
+import { Message as MessageType } from '@/hooks/useChat';
 
 interface ChatContentProps {
-  messages: Message[];
+  messages: MessageType[];
   isLoading: boolean;
   showTravelOptions: boolean;
   showAssociationMap: boolean;
@@ -16,6 +16,12 @@ interface ChatContentProps {
   showCombinationRoute: boolean;
   showCalendarInfo: boolean;
   onSendMessage: (message: string) => void;
+  onAnalysisClick: () => void;
+  onOfferSeatClick: () => void;
+  onToWorkClick: () => void;
+  onFromHereClick: () => void;
+  onAssociationActivityClick: () => void;
+  onToHomeClick: () => void;
 }
 
 const ChatContent: React.FC<ChatContentProps> = ({
@@ -25,7 +31,13 @@ const ChatContent: React.FC<ChatContentProps> = ({
   showAssociationMap,
   showCalendarInfo,
   showCombinationRoute,
-  onSendMessage
+  onSendMessage,
+  onAnalysisClick,
+  onOfferSeatClick,
+  onToWorkClick,
+  onFromHereClick,
+  onAssociationActivityClick,
+  onToHomeClick
 }) => {
   // Define the steps for the combination route
   const combinationSteps = [{
@@ -44,7 +56,15 @@ const ChatContent: React.FC<ChatContentProps> = ({
 
   return <>
       <div className="flex-1 overflow-y-auto">
-        <MessageList messages={messages} />
+        <MessageList 
+          messages={messages} 
+          onAnalysisClick={onAnalysisClick}
+          onOfferSeatClick={onOfferSeatClick}
+          onToWorkClick={onToWorkClick}
+          onFromHereClick={onFromHereClick}
+          onAssociationActivityClick={onAssociationActivityClick}
+          onToHomeClick={onToHomeClick}
+        />
         
         {showTravelOptions && <div className="w-full max-w-3xl mx-auto px-4 py-4">
             <div className="flex flex-col md:flex-row md:gap-4 justify-center items-center">
