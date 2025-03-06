@@ -1,8 +1,9 @@
-# Welcome to your GPT Engineer project
+
+# Åke - AI-reseplanerare
 
 ## Project info
 
-**URL**: https://run.gptengineer.app/projects/9d4bcff1-da7e-4e73-bb35-7a988b4bdb7f/improve
+En prototyp av "Åke" - en unik AI-reseplanerare.
 
 ## How can I edit this code?
 
@@ -52,7 +53,7 @@ npm run dev
 
 ## What technologies are used for this project?
 
-This project is built with .
+This project is built with:
 
 - Vite
 - TypeScript
@@ -62,10 +63,11 @@ This project is built with .
 
 ## How can I deploy this project?
 
-All GPT Engineer projects can be deployed directly via the GPT Engineer app.
+See [DEPLOY.md](./DEPLOY.md) for detailed deployment instructions.
 
-Simply visit your project at [GPT Engineer](https://gptengineer.app/projects/9d4bcff1-da7e-4e73-bb35-7a988b4bdb7f/improve) and click on Share -> Publish.
+For Netlify deployment:
+1. Connect your GitHub repository to Netlify
+2. Netlify will use the settings in `netlify.toml`
+3. Your site will be built and deployed automatically
 
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.gptengineer.app/tips-tricks/custom-domain/)
+For more details, refer to the deployment documentation.
