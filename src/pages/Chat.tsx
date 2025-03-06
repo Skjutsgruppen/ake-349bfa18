@@ -7,6 +7,7 @@ import ChatHeader from '@/components/ChatHeader';
 import ChatInput from '@/components/ChatInput';
 import ActionButtons from '@/components/ActionButtons';
 import MessageList from '@/components/MessageList';
+import TravelOption from '@/components/TravelOption';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -19,6 +20,7 @@ const Chat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userName, setUserName] = useState('');
   const [awaitingSeatsInput, setAwaitingSeatsInput] = useState(false);
+  const [showTravelOptions, setShowTravelOptions] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -37,6 +39,7 @@ const Chat = () => {
     console.log("Reset chat triggered");
     setMessages([]);
     setAwaitingSeatsInput(false);
+    setShowTravelOptions(false);
   };
 
   const toggleSidebar = () => {
@@ -45,6 +48,7 @@ const Chat = () => {
 
   const handleOfferSeatClick = () => {
     setIsLoading(true);
+    setShowTravelOptions(false);
     
     // Add a user action message
     const userMessage: Message = {
@@ -67,8 +71,39 @@ const Chat = () => {
     }, 1000);
   };
 
+  const handleToWorkClick = () => {
+    setIsLoading(true);
+    setAwaitingSeatsInput(false);
+    
+    // Get current time
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    
+    // First, add a user action message
+    const userMessage: Message = {
+      role: 'user',
+      content: 'Visa mig resa till jobbet.'
+    };
+    
+    setMessages([userMessage]);
+    
+    // Then simulate a delay before assistant response
+    setTimeout(() => {
+      const workTripMessage: Message = {
+        role: 'assistant',
+        content: `Jag ser att klockan nu är ${hours}.${minutes} så jag gissar att du funderar på resor till jobbet imorgon? Här är två alternativ mellan ditt hem och Volvo`
+      };
+      
+      setMessages(prevMessages => [...prevMessages, workTripMessage]);
+      setIsLoading(false);
+      setShowTravelOptions(true);
+    }, 1000);
+  };
+
   const handleAnalysisClick = () => {
     setIsLoading(true);
+    setShowTravelOptions(false);
     
     // First, add a user action message
     const userMessage: Message = {
@@ -143,6 +178,7 @@ Vill du att vi går vidare med någon av dessa?`
       };
 
       setMessages([...newMessages, assistantMessage]);
+      setShowTravelOptions(false);
     } catch (error: any) {
       toast({
         title: "Fel",
@@ -176,13 +212,37 @@ Vill du att vi går vidare med någon av dessa?`
               <ActionButtons 
                 onAnalysisClick={handleAnalysisClick} 
                 onOfferSeatClick={handleOfferSeatClick}
+                onToWorkClick={handleToWorkClick}
               />
             </div>
           ) : (
             <>
               <div className="flex-1 overflow-y-auto">
                 <MessageList messages={messages} />
+                
+                {showTravelOptions && (
+                  <div className="w-full max-w-3xl mx-auto px-4 py-4">
+                    <div className="flex flex-col md:flex-row md:gap-4 justify-center items-center">
+                      <TravelOption
+                        type="bus"
+                        title="Buss från Okestervägen"
+                        description="Från Okestervägen kl 06.30"
+                        mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2132.743946285806!2d12.809598277112915!3d57.71898857503214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465aa0b11ae6a52f%3A0xe20e4d28a17b46f9!2sOkesterv%C3%A4gen%2C%20506%2030%20Bor%C3%A5s!5e0!3m2!1ssv!2sse!4v1714571582726!5m2!1ssv!2sse"
+                      />
+                      
+                      <div className="py-2 text-center">eller</div>
+                      
+                      <TravelOption
+                        type="carpool"
+                        title="Samåkning med Filippa"
+                        description="Från Borås C till Göteborg C kl 07.00. Filippa från Friluftsfrämjandet."
+                        mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2131.8453814670745!2d12.930329577113534!3d57.72124517502991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465aa0873a5efbcb%3A0xd02cc1aca5728a2f!2sBor%C3%A5s%20C!5e0!3m2!1ssv!2sse!4v1714572046398!5m2!1ssv!2sse"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
+              
               <div className="w-full max-w-3xl mx-auto px-4 py-2">
                 <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
               </div>

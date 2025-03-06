@@ -1,12 +1,13 @@
 
-import { Car, MapPin, Briefcase, Home, Users, Sparkles } from "lucide-react";
+import { Car, MapPin, Briefcase, Home, Users, Sparkles, Bus } from "lucide-react";
 
 interface ActionButtonsProps {
   onAnalysisClick: () => void;
   onOfferSeatClick: () => void;
+  onToWorkClick: () => void;
 }
 
-const ActionButtons = ({ onAnalysisClick, onOfferSeatClick }: ActionButtonsProps) => {
+const ActionButtons = ({ onAnalysisClick, onOfferSeatClick, onToWorkClick }: ActionButtonsProps) => {
   const actions = [
     { 
       icon: <Car className="h-4 w-4 text-purple-400" />, 
@@ -15,7 +16,11 @@ const ActionButtons = ({ onAnalysisClick, onOfferSeatClick }: ActionButtonsProps
     },
     { icon: <MapPin className="h-4 w-4 text-red-400" />, label: "Härifrån" },
     { icon: <Users className="h-4 w-4 text-blue-400" />, label: "Föreningsaktivitet" },
-    { icon: <Briefcase className="h-4 w-4 text-green-400" />, label: "Till jobbet" },
+    { 
+      icon: <Briefcase className="h-4 w-4 text-green-400" />, 
+      label: "Till jobbet",
+      onClick: onToWorkClick
+    },
     { icon: <Home className="h-4 w-4 text-yellow-400" />, label: "Till hem" },
     { 
       icon: <Sparkles className="h-4 w-4 text-amber-400" />, 
