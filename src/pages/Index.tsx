@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import Sidebar from '@/components/Sidebar';
@@ -20,8 +21,8 @@ const Index = () => {
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) {
       toast({
-        title: "Error",
-        description: "Please enter a message",
+        title: "Fel",
+        description: "Vänligen skriv ett meddelande",
         variant: "destructive"
       });
       return;
@@ -40,15 +41,28 @@ const Index = () => {
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
+      // Generate a response based on the user's message
+      let response = "Jag förstår inte riktigt din fråga. Kan du försöka omformulera den?";
+      
+      if (content.toLowerCase().includes("samåk") || content.toLowerCase().includes("skjuts")) {
+        response = "Vi har flera samåkningsmöjligheter från Skjutsgruppen! Det finns resor mellan Göteborg och Stockholm på fredag. Vill du veta mer om tillgängliga samåkningsalternativ?";
+      } else if (content.toLowerCase().includes("buss") || content.toLowerCase().includes("spårvagn") || content.toLowerCase().includes("västtrafik")) {
+        response = "Västtrafik har flera avgångar som kan passa dig. Buss 16 avgår var 10:e minut från centralen. Vill du se hela tidtabellen?";
+      } else if (content.toLowerCase().includes("kombination") || content.toLowerCase().includes("både och")) {
+        response = "För en kombinerad resa rekommenderar jag att ta samåkning till Korsvägen och sedan buss 50 till ditt slutmål. Detta sparar både tid och pengar samtidigt som det minskar miljöpåverkan!";
+      } else if (content.toLowerCase().includes("hej") || content.toLowerCase().includes("hallå")) {
+        response = "Hej! Jag är Åke, din reseassistent. Jag kan hjälpa dig med både kollektivtrafik via Västtrafik och samåkning via Skjutsgruppen. Vad behöver du hjälp med idag?";
+      }
+
       const assistantMessage: Message = {
         role: 'assistant',
-        content: "I am a hardcoded response. The database connection has been removed for testing purposes. You can modify this response in the Index.tsx file."
+        content: response
       };
 
       setMessages([...newMessages, assistantMessage]);
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: "Fel",
         description: error.message,
         variant: "destructive"
       });
@@ -72,7 +86,7 @@ const Index = () => {
           {messages.length === 0 ? (
             <div className="w-full max-w-3xl px-4 space-y-4">
               <div>
-                <h1 className="mb-8 text-4xl font-semibold text-center">What can I help with?</h1>
+                <h1 className="mb-8 text-4xl font-semibold text-center">Hur kan jag hjälpa dig med din resa?</h1>
                 <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
               </div>
               <ActionButtons />
@@ -84,7 +98,7 @@ const Index = () => {
                 <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
               </div>
               <div className="text-xs text-center text-gray-500 py-2">
-                ChatGPT can make mistakes. Check important info.
+                Åke kan göra misstag. Kontrollera viktig reseinformation.
               </div>
             </>
           )}

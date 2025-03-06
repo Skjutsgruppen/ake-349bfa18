@@ -1,4 +1,5 @@
-import { Menu, Globe, ChevronDown, Key } from "lucide-react";
+
+import { Menu, Globe, ChevronDown, Clock, Car, Bus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -12,24 +13,24 @@ interface SidebarProps {
 const Sidebar = ({ isOpen, onToggle, onApiKeyChange }: SidebarProps) => {
   const [apiKey, setApiKey] = useState("");
   const timeframes = [
-    { title: "Yesterday", items: ["Using Tailwind CSS Guide"] },
+    { title: "Igår", items: ["Kollektivtrafik till Göteborg"] },
     { 
-      title: "Previous 7 Days", 
+      title: "Senaste 7 dagarna", 
       items: [
-        "Likeable and Inception Levels",
-        "Viral Figma Board Ideas",
-        "RAG Status in Software Dev",
-        "Image Input ChatGPT API"
+        "Samåkning till Stockholm",
+        "Västtrafik tidtabell",
+        "Buss 16 hållplatser",
+        "Pendlingsinformation"
       ] 
     },
     {
-      title: "Previous 30 Days",
+      title: "Senaste 30 dagarna",
       items: [
-        "Focus on Lovable Viral",
-        "Create Twitter Clone",
-        "Reddit Posting Guidelines",
-        "Revamping Social Features",
-        "US AI Voting Logo"
+        "Kombinerad resa till Landvetter",
+        "Hitta samåkning Borås",
+        "Miljövänligt resande",
+        "Kollektivtrafik Mölndal",
+        "Billig transport Lerum"
       ]
     }
   ];
@@ -45,7 +46,7 @@ const Sidebar = ({ isOpen, onToggle, onApiKeyChange }: SidebarProps) => {
       "fixed top-0 left-0 z-40 h-screen bg-chatgpt-sidebar transition-all duration-300",
       isOpen ? "w-64" : "w-0"
     )}>
-      <nav className="flex h-full w-full flex-col px-3" aria-label="Chat history">
+      <nav className="flex h-full w-full flex-col px-3" aria-label="Chatthistorik">
         <div className="flex justify-between flex h-[60px] items-center">
           <button onClick={onToggle} className="h-10 rounded-lg px-2 text-token-text-secondary hover:bg-token-sidebar-surface-secondary">
             <Menu className="h-5 w-5" />
@@ -61,12 +62,12 @@ const Sidebar = ({ isOpen, onToggle, onApiKeyChange }: SidebarProps) => {
           {isOpen && (
             <div className="p-2 mb-4">
               <div className="flex items-center gap-2 mb-2">
-                <Key className="h-4 w-4" />
-                <span className="text-sm">API Key</span>
+                <Clock className="h-4 w-4" />
+                <span className="text-sm">Platsinställningar</span>
               </div>
               <Input
-                type="password"
-                placeholder="Enter your API key"
+                type="text"
+                placeholder="Ange din hemort"
                 value={apiKey}
                 onChange={handleApiKeyChange}
                 className="bg-[#2F2F2F] border-none"
@@ -78,15 +79,15 @@ const Sidebar = ({ isOpen, onToggle, onApiKeyChange }: SidebarProps) => {
             <div className="flex flex-col gap-2 px-2 py-2">
               <div className="group flex h-10 items-center gap-2.5 rounded-lg px-2 hover:bg-token-sidebar-surface-secondary cursor-pointer">
                 <div className="h-6 w-6 flex items-center justify-center">
-                  <Globe className="h-4 w-4" />
+                  <Car className="h-4 w-4" />
                 </div>
-                <span className="text-sm">ChatGPT</span>
+                <span className="text-sm">Samåkning</span>
               </div>
               <div className="group flex h-10 items-center gap-2.5 rounded-lg px-2 hover:bg-token-sidebar-surface-secondary cursor-pointer">
                 <div className="h-6 w-6 flex items-center justify-center">
-                  <Globe className="h-4 w-4" />
+                  <Bus className="h-4 w-4" />
                 </div>
-                <span className="text-sm">Explore GPTs</span>
+                <span className="text-sm">Kollektivtrafik</span>
               </div>
             </div>
 
@@ -116,8 +117,8 @@ const Sidebar = ({ isOpen, onToggle, onApiKeyChange }: SidebarProps) => {
                     </svg>
                   </span>
                   <div className="flex flex-col">
-                    <span>Upgrade plan</span>
-                    <span className="line-clamp-1 text-xs text-token-text-tertiary">More access to the best models</span>
+                    <span>Uppgradera plan</span>
+                    <span className="line-clamp-1 text-xs text-token-text-tertiary">Fler möjligheter att kombinera resor</span>
                   </div>
                 </div>
               </span>
