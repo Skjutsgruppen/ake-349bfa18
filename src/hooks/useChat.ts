@@ -53,7 +53,7 @@ export const useChat = () => {
 
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      let response = "Jag är bara en prototyp än så länge, så jag är lite begränsad i mina svar. Här är några saker du kan pröva:";
+      let response = "Jag är bara en prototyp än så länge, så jag är lite begränsad i mina svar. Här är några saker du kan prova:";
       let includeRouteSteps = false;
       let showActionButtons = true;
       
