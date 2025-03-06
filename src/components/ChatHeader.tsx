@@ -30,7 +30,7 @@ const ChatHeader = ({ isSidebarOpen = true }: ChatHeaderProps) => {
             <Menu className="h-5 w-5 cursor-pointer" />
           )}
           <span 
-            className="font-semibold cursor-pointer"
+            className={`font-semibold cursor-pointer ${!isSidebarOpen ? 'ml-24' : ''}`}
             onClick={handleLogoClick}
           >
             Åke
