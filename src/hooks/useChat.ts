@@ -7,6 +7,7 @@ export type Message = {
   content: string;
   includeRouteSteps?: boolean;
   showActionButtons?: boolean;
+  showTravelOptions?: boolean;
 };
 
 export const useChat = () => {

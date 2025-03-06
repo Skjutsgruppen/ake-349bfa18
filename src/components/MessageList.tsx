@@ -40,6 +40,7 @@ const MessageList: React.FC<MessageListProps> = ({
           content={message.content} 
           includeRouteSteps={message.includeRouteSteps}
           showActionButtons={message.showActionButtons}
+          showTravelOptions={message.showTravelOptions} // Add this property
           onAnalysisClick={onAnalysisClick}
           onOfferSeatClick={onOfferSeatClick}
           onToWorkClick={onToWorkClick}

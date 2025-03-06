@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Message } from '@/hooks/useChat';
 import { ActionHandlerProps } from './actionTypes';
@@ -62,12 +63,14 @@ export const useTransportActions = ({
     setTimeout(() => {
       const workTripMessage: Message = {
         role: 'assistant',
-        content: `Jag ser att klockan nu är ${hours}.${minutes} så jag gissar att du funderar på resor till jobbet imorgon? Här är två alternativ mellan ditt hem och Volvo`
+        content: `Jag ser att klockan nu är ${hours}.${minutes} så jag gissar att du funderar på resor till jobbet imorgon? Här är två alternativ mellan ditt hem och Volvo`,
+        showTravelOptions: true // Add this property to indicate travel options should be shown
       };
       
       setMessages(prevMessages => [...prevMessages, workTripMessage]);
       setIsLoading(false);
-      setShowTravelOptions(true);
+      // No longer need to set this state as it will be controlled by the message
+      // setShowTravelOptions(true);
     }, 1000);
   };
 
