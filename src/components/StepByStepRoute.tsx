@@ -5,7 +5,6 @@ import { PersonStanding, Bus, Car } from 'lucide-react';
 type TransportStep = {
   type: 'walk' | 'bus' | 'carpool';
   description: string;
-  title?: string;
 };
 
 interface StepByStepRouteProps {
@@ -27,16 +26,13 @@ const StepByStepRoute: React.FC<StepByStepRouteProps> = ({ steps }) => {
   };
 
   return (
-    <div className="flex flex-col items-start w-full max-w-md">
+    <div className="flex flex-col items-start w-full max-w-md mx-auto mt-4 mb-6">
       {steps.map((step, index) => (
         <div key={index} className="w-full relative mb-8 last:mb-0">
-          <div className="bg-gray-700/50 rounded-xl p-4 w-full shadow-md">
+          <div className="bg-gray-800/50 rounded-xl p-4 w-full shadow-md">
             <div className="flex items-center">
               {getIcon(step.type)}
-              <span className="ml-2">
-                {step.title && <strong>{step.title}: </strong>}
-                {step.description}
-              </span>
+              <span className="ml-2">{step.description}</span>
             </div>
           </div>
           
