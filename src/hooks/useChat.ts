@@ -62,7 +62,7 @@ export const useChat = () => {
         setAwaitingSeatsInput(false);
         showActionButtons = false;
       } else if (content.toLowerCase().includes("samåk") || content.toLowerCase().includes("skjuts")) {
-        response = "Vi har flera samåkningsmöjligheter från Skjutsgruppen! Det finns resor mellan Göteborg och Stockholm på fredag. Vill du veta mer om tillgängliga samåkningsalternativ?";
+        response = "Det finns massa samåkningsmöjligheter just nu! Vill du ha en sammanfattad lista utifrån din GPS-position eller ett specifikt datum och plats?";
         showActionButtons = false;
       } else if (content.toLowerCase().includes("buss") || content.toLowerCase().includes("spårvagn") || content.toLowerCase().includes("västtrafik")) {
         response = "Västtrafik har flera avgångar som kan passa dig. Buss 16 avgår var 10:e minut från centralen. Vill du se hela tidtabellen?";
