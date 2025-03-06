@@ -30,10 +30,6 @@ const CombinationRoute: React.FC<CombinationRouteProps> = ({ steps }) => {
           )}
         </div>
       ))}
-      
-      <div className="mt-6 text-center">
-        <p className="text-lg font-medium">Vill du att jag planerar denna resa med dig?</p>
-      </div>
     </div>
   );
 };
