@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Walking, Bus, Car } from 'lucide-react';
+import { PersonStanding, Bus, Car } from 'lucide-react';
 
 type TransportStep = {
   type: 'walk' | 'bus' | 'carpool';
@@ -15,7 +15,7 @@ const StepByStepRoute: React.FC<StepByStepRouteProps> = ({ steps }) => {
   const getIcon = (type: TransportStep['type']) => {
     switch (type) {
       case 'walk':
-        return <Walking className="h-5 w-5 text-blue-400" />;
+        return <PersonStanding className="h-5 w-5 text-blue-400" />;
       case 'bus':
         return <Bus className="h-5 w-5 text-green-400" />;
       case 'carpool':
