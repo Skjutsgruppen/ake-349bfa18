@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 
 interface ChatHeaderProps {
   isSidebarOpen?: boolean;
+  resetChat: () => void;
 }
 
-const ChatHeader = ({ isSidebarOpen = true }: ChatHeaderProps) => {
+const ChatHeader = ({ isSidebarOpen = true, resetChat }: ChatHeaderProps) => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   
@@ -18,9 +19,8 @@ const ChatHeader = ({ isSidebarOpen = true }: ChatHeaderProps) => {
     }
   }, []);
 
-  const handleNavigation = () => {
-    // Navigate to chat which will show the start page if messages are empty
-    navigate('/chat');
+  const handleReset = () => {
+    resetChat();
   };
 
   return (
@@ -28,11 +28,11 @@ const ChatHeader = ({ isSidebarOpen = true }: ChatHeaderProps) => {
       <div className="flex h-[60px] items-center justify-between px-4">
         <div className="flex items-center gap-2">
           {isSidebarOpen && (
-            <Menu className="h-5 w-5 cursor-pointer" onClick={handleNavigation} />
+            <Menu className="h-5 w-5 cursor-pointer" onClick={handleReset} />
           )}
           <span 
             className={`font-semibold cursor-pointer ${!isSidebarOpen ? 'ml-24' : ''}`}
-            onClick={handleNavigation}
+            onClick={handleReset}
           >
             Åke
           </span>

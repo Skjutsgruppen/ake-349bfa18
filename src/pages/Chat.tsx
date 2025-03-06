@@ -33,6 +33,7 @@ const Chat = () => {
 
   // Reset messages and return to the start page
   const resetChat = () => {
+    console.log("Reset chat triggered");
     setMessages([]);
   };
 
@@ -95,10 +96,11 @@ const Chat = () => {
         isOpen={isSidebarOpen} 
         onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
         onApiKeyChange={() => {}}
+        resetChat={resetChat}
       />
       
       <main className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
-        <ChatHeader isSidebarOpen={isSidebarOpen} />
+        <ChatHeader isSidebarOpen={isSidebarOpen} resetChat={resetChat} />
         
         <div className={`flex h-full flex-col ${messages.length === 0 ? 'items-center justify-center' : 'justify-between'} pt-[60px] pb-4`}>
           {messages.length === 0 ? (

@@ -28,11 +28,8 @@ const Welcome = () => {
 
   return (
     <div className="flex h-screen items-center justify-center bg-chatgpt-main p-4">
-      <div className="w-full max-w-md space-y-6 rounded-xl border border-gray-700 bg-[#2A2B32] p-8 shadow-lg">
+      <div className="w-full max-w-md space-y-6 rounded-xl border border-gray-700 p-8">
         <div className="text-center">
-          <div className="mx-auto mb-6 h-16 w-16 flex items-center justify-center rounded-full bg-[#00aeef]">
-            {/* Empty circle */}
-          </div>
           <h1 className="mb-6 text-4xl font-bold text-white">Hej!</h1>
           <p className="mb-8 text-lg text-gray-300">
             Det här en prototyp av "Åke" - en unik AI-reseplanerare. I det här testscenariot är du medlem i Scouterna, bor i Borås och jobbar på Volvo.
