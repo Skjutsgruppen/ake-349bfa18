@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
@@ -180,6 +179,34 @@ Vill du att vi går vidare med någon av dessa?`
     }, 1000);
   };
 
+  const handleToHomeClick = () => {
+    setIsLoading(true);
+    setShowTravelOptions(false);
+    setShowAssociationMap(false);
+    
+    const userMessage: Message = {
+      role: 'user',
+      content: 'Visa mig resealternativ till hem.'
+    };
+    
+    setMessages([userMessage]);
+    
+    setTimeout(() => {
+      const toHomeMessage: Message = {
+        role: 'assistant',
+        content: `Jag ser att du befinner dig vid Bollebygd station och vill åka hem till Orkestervägen i Borås. Här är ett kombinationsalternativ:
+
+1. Gå 5 minuter till Bollebygd Centrum (350m)
+2. Ta buss 101 mot Borås kl 19:15
+3. Byt vid Borås Resecentrum till samåkning med Erika som kör till Sjöbo kl 19:45
+4. Promenad sista 400m till Orkestervägen (5 min)`
+      };
+      
+      setMessages(prevMessages => [...prevMessages, toHomeMessage]);
+      setIsLoading(false);
+    }, 1000);
+  };
+
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) {
       toast({
@@ -261,6 +288,7 @@ Vill du att vi går vidare med någon av dessa?`
                 onToWorkClick={handleToWorkClick}
                 onFromHereClick={handleFromHereClick}
                 onAssociationActivityClick={handleAssociationActivityClick}
+                onToHomeClick={handleToHomeClick}
               />
             </div>
           ) : (

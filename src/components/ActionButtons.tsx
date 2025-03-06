@@ -7,6 +7,7 @@ interface ActionButtonsProps {
   onToWorkClick: () => void;
   onFromHereClick?: () => void;
   onAssociationActivityClick?: () => void;
+  onToHomeClick?: () => void;
 }
 
 const ActionButtons = ({ 
@@ -14,7 +15,8 @@ const ActionButtons = ({
   onOfferSeatClick, 
   onToWorkClick, 
   onFromHereClick,
-  onAssociationActivityClick 
+  onAssociationActivityClick,
+  onToHomeClick
 }: ActionButtonsProps) => {
   const actions = [
     { 
@@ -39,7 +41,8 @@ const ActionButtons = ({
     },
     { 
       icon: <Home className="h-4 w-4 text-yellow-400" />, 
-      label: "Till hem" 
+      label: "Till hem",
+      onClick: onToHomeClick
     },
     { 
       icon: <Sparkles className="h-4 w-4 text-amber-400" />, 
