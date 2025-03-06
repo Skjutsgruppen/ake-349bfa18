@@ -1,13 +1,14 @@
 
-import { Car, Bus, Calendar, Clock, MapPin } from "lucide-react";
+import { Car, MapPin, Briefcase, Home, Users, Sparkles } from "lucide-react";
 
 const ActionButtons = () => {
   const actions = [
-    { icon: <Car className="h-4 w-4 text-purple-400" />, label: "Hitta samåkning" },
-    { icon: <Bus className="h-4 w-4 text-blue-400" />, label: "Kollektivtrafik" },
-    { icon: <Calendar className="h-4 w-4 text-green-400" />, label: "Planera resa" },
-    { icon: <Clock className="h-4 w-4 text-yellow-400" />, label: "Resetider" },
-    { icon: <MapPin className="h-4 w-4 text-red-400" />, label: "Hitta hållplats" },
+    { icon: <Car className="h-4 w-4 text-purple-400" />, label: "Erbjud plats" },
+    { icon: <MapPin className="h-4 w-4 text-red-400" />, label: "Härifrån" },
+    { icon: <Users className="h-4 w-4 text-blue-400" />, label: "Föreningsaktivitet" },
+    { icon: <Briefcase className="h-4 w-4 text-green-400" />, label: "Till jobbet" },
+    { icon: <Home className="h-4 w-4 text-yellow-400" />, label: "Till hem" },
+    { icon: <Sparkles className="h-4 w-4 text-amber-400" />, label: "Analys" },
   ];
 
   return (
