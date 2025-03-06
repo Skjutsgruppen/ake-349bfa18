@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
@@ -71,35 +70,35 @@ const Chat = () => {
     }, 1000);
   };
 
-  const handleToWorkClick = () => {
-    setIsLoading(true);
-    setAwaitingSeatsInput(false);
-    
-    // Get current time
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    
-    // First, add a user action message
-    const userMessage: Message = {
-      role: 'user',
-      content: 'Visa mig resa till jobbet.'
+const handleToWorkClick = () => {
+  setIsLoading(true);
+  setAwaitingSeatsInput(false);
+  
+  // Get current time
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  
+  // First, add a user action message
+  const userMessage: Message = {
+    role: 'user',
+    content: 'Visa mig resa till jobbet.'
+  };
+  
+  setMessages([userMessage]);
+  
+  // Then simulate a delay before assistant response
+  setTimeout(() => {
+    const workTripMessage: Message = {
+      role: 'assistant',
+      content: `Jag ser att klockan nu är ${hours}.${minutes} så jag gissar att du funderar på resor till jobbet imorgon? Här är två alternativ mellan ditt hem och Volvo`
     };
     
-    setMessages([userMessage]);
-    
-    // Then simulate a delay before assistant response
-    setTimeout(() => {
-      const workTripMessage: Message = {
-        role: 'assistant',
-        content: `Jag ser att klockan nu är ${hours}.${minutes} så jag gissar att du funderar på resor till jobbet imorgon? Här är två alternativ mellan ditt hem och Volvo`
-      };
-      
-      setMessages(prevMessages => [...prevMessages, workTripMessage]);
-      setIsLoading(false);
-      setShowTravelOptions(true);
-    }, 1000);
-  };
+    setMessages(prevMessages => [...prevMessages, workTripMessage]);
+    setIsLoading(false);
+    setShowTravelOptions(true);
+  }, 1000);
+};
 
   const handleAnalysisClick = () => {
     setIsLoading(true);
@@ -225,8 +224,8 @@ Vill du att vi går vidare med någon av dessa?`
                     <div className="flex flex-col md:flex-row md:gap-4 justify-center items-center">
                       <TravelOption
                         type="bus"
-                        title="Buss från Okestervägen"
-                        description="Från Okestervägen kl 06.30"
+                        title="Buss från Orkestervägen"
+                        description="Från Orkestervägen kl 06.30"
                         mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2132.743946285806!2d12.809598277112915!3d57.71898857503214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465aa0b11ae6a52f%3A0xe20e4d28a17b46f9!2sOkesterv%C3%A4gen%2C%20506%2030%20Bor%C3%A5s!5e0!3m2!1ssv!2sse!4v1714571582726!5m2!1ssv!2sse"
                       />
                       

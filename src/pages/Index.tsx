@@ -75,6 +75,14 @@ const Index = () => {
     }
   };
 
+  const handleAnalysisClick = () => {
+    console.log("Analysis clicked");
+  };
+
+  const handleOfferSeatClick = () => {
+    console.log("Offer seat clicked");
+  };
+
   return (
     <div className="flex h-screen">
       <Sidebar 
@@ -95,8 +103,9 @@ const Index = () => {
                 <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
               </div>
               <ActionButtons 
-                onAnalysisClick={() => {}}
-                onOfferSeatClick={() => {}}
+                onAnalysisClick={handleAnalysisClick} 
+                onOfferSeatClick={handleOfferSeatClick}
+                onToWorkClick={() => {}}
               />
             </div>
           ) : (

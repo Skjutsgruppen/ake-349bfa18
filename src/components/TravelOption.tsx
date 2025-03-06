@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Bus, Car } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface TravelOptionProps {
   type: 'bus' | 'carpool';
@@ -21,7 +22,7 @@ const TravelOption: React.FC<TravelOptionProps> = ({ type, title, description, m
         <h3 className="font-medium">{title}</h3>
       </div>
       <p className="text-gray-300 mb-3 text-sm">{description}</p>
-      <div className="relative w-full h-32 overflow-hidden rounded-md">
+      <div className="relative w-full h-32 overflow-hidden rounded-md mb-3">
         <iframe 
           src={mapUrl}
           className="absolute top-0 left-0 w-full h-full border-0"
@@ -30,6 +31,14 @@ const TravelOption: React.FC<TravelOptionProps> = ({ type, title, description, m
           referrerPolicy="no-referrer-when-downgrade"
           title={`Map for ${title}`}
         ></iframe>
+      </div>
+      <div className="flex justify-end">
+        <Button 
+          variant="outline" 
+          className="border-gray-600 hover:bg-gray-700 text-gray-200"
+        >
+          Välj
+        </Button>
       </div>
     </div>
   );
