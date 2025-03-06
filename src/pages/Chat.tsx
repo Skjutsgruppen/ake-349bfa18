@@ -28,12 +28,10 @@ const Chat = () => {
     if (savedName) {
       setUserName(savedName);
     } else {
-      // Redirect to welcome page if no name is set
       navigate('/');
     }
   }, [navigate]);
 
-  // Reset messages and return to the start page
   const resetChat = () => {
     console.log("Reset chat triggered");
     setMessages([]);
@@ -49,7 +47,6 @@ const Chat = () => {
     setIsLoading(true);
     setShowTravelOptions(false);
     
-    // Add a user action message
     const userMessage: Message = {
       role: 'user',
       content: 'Jag vill erbjuda platser i min bil.'
@@ -57,7 +54,6 @@ const Chat = () => {
     
     setMessages([userMessage]);
     
-    // Simulate a delay before assistant response
     setTimeout(() => {
       const assistantMessage: Message = {
         role: 'assistant',
@@ -70,41 +66,64 @@ const Chat = () => {
     }, 1000);
   };
 
-const handleToWorkClick = () => {
-  setIsLoading(true);
-  setAwaitingSeatsInput(false);
-  
-  // Get current time
-  const now = new Date();
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  
-  // First, add a user action message
-  const userMessage: Message = {
-    role: 'user',
-    content: 'Visa mig resa till jobbet.'
-  };
-  
-  setMessages([userMessage]);
-  
-  // Then simulate a delay before assistant response
-  setTimeout(() => {
-    const workTripMessage: Message = {
-      role: 'assistant',
-      content: `Jag ser att klockan nu är ${hours}.${minutes} så jag gissar att du funderar på resor till jobbet imorgon? Här är två alternativ mellan ditt hem och Volvo`
+  const handleToWorkClick = () => {
+    setIsLoading(true);
+    setAwaitingSeatsInput(false);
+    
+    const hours = "19";
+    const minutes = "07";
+    
+    const userMessage: Message = {
+      role: 'user',
+      content: 'Visa mig resa till jobbet.'
     };
     
-    setMessages(prevMessages => [...prevMessages, workTripMessage]);
-    setIsLoading(false);
-    setShowTravelOptions(true);
-  }, 1000);
-};
+    setMessages([userMessage]);
+    
+    setTimeout(() => {
+      const workTripMessage: Message = {
+        role: 'assistant',
+        content: `Jag ser att klockan nu är ${hours}.${minutes} så jag gissar att du funderar på resor till jobbet imorgon? Här är två alternativ mellan ditt hem och Volvo`
+      };
+      
+      setMessages(prevMessages => [...prevMessages, workTripMessage]);
+      setIsLoading(false);
+      setShowTravelOptions(true);
+    }, 1000);
+  };
+
+  const handleFromHereClick = () => {
+    setIsLoading(true);
+    setShowTravelOptions(false);
+    
+    const userMessage: Message = {
+      role: 'user',
+      content: 'Visa mig resealternativ härifrån.'
+    };
+    
+    setMessages([userMessage]);
+    
+    setTimeout(() => {
+      const fromHereMessage: Message = {
+        role: 'assistant',
+        content: `Jag ser att du befinner dig vid Göteborgs Centralstation. Här är olika resealternativ:
+
+1. Buss 16 mot Högsbohöjd avgår om 5 minuter från hållplats B
+2. Spårvagn 6 mot Kortedala avgår om 7 minuter från hållplats D
+3. Maria erbjuder samåkning till Mölndal med avgång om 15 minuter
+4. Cykelpool har 3 lediga elcyklar vid stationens norra entré
+5. Anders från STF har plats i bilen till Borås med avgång kl 19.30`
+      };
+      
+      setMessages(prevMessages => [...prevMessages, fromHereMessage]);
+      setIsLoading(false);
+    }, 1000);
+  };
 
   const handleAnalysisClick = () => {
     setIsLoading(true);
     setShowTravelOptions(false);
     
-    // First, add a user action message
     const userMessage: Message = {
       role: 'user',
       content: 'Visa min reseanalys.'
@@ -112,7 +131,6 @@ const handleToWorkClick = () => {
     
     setMessages([userMessage]);
     
-    // Then simulate a delay before assistant response
     setTimeout(() => {
       const analysisMessage: Message = {
         role: 'assistant',
@@ -152,12 +170,10 @@ Vill du att vi går vidare med någon av dessa?`
       
       setMessages(newMessages);
 
-      // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       let response = "Jag är bara en prototyp än så länge, så jag kan inte chatta längre än så här";
       
-      // Handle continuation of "Erbjud plats" flow
       if (awaitingSeatsInput) {
         response = "Vill du erbjuda platser din vanligaste sträcka, från hemmet till jobbet?";
         setAwaitingSeatsInput(false);
@@ -212,6 +228,7 @@ Vill du att vi går vidare med någon av dessa?`
                 onAnalysisClick={handleAnalysisClick} 
                 onOfferSeatClick={handleOfferSeatClick}
                 onToWorkClick={handleToWorkClick}
+                onFromHereClick={handleFromHereClick}
               />
             </div>
           ) : (

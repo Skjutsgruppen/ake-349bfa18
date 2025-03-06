@@ -35,7 +35,7 @@ const TravelOption: React.FC<TravelOptionProps> = ({ type, title, description, m
       <div className="flex justify-end">
         <Button 
           variant="outline" 
-          className="border-gray-600 hover:bg-gray-700 text-gray-200"
+          className="border-gray-600 hover:bg-gray-700 text-gray-200 rounded-full"
         >
           Välj
         </Button>
