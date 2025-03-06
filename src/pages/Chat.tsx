@@ -106,13 +106,13 @@ const Chat = () => {
     setTimeout(() => {
       const fromHereMessage: Message = {
         role: 'assistant',
-        content: `Jag ser att du befinner dig vid Göteborgs Centralstation. Här är olika resealternativ:
+        content: `Jag ser att du befinner dig vid Bollebygd station. Här är olika resealternativ:
 
-1. Buss 16 mot Högsbohöjd avgår om 5 minuter från hållplats B
-2. Spårvagn 6 mot Kortedala avgår om 7 minuter från hållplats D
-3. Maria erbjuder samåkning till Mölndal med avgång om 15 minuter
-4. Cykelpool har 3 lediga elcyklar vid stationens norra entré
-5. Anders från STF har plats i bilen till Borås med avgång kl 19.30`
+1. Buss 101 mot Landvetter avgår om 5 minuter från hållplats A
+2. X3 mot Göteborg avgår om 12 minuter från hållplats B
+3. Karin erbjuder samåkning till Borås med avgång om 15 minuter
+4. Cykelpool har 2 lediga elcyklar vid stationens norra entré
+5. Sven från Friluftsfrämjandet har plats i bilen till Ulricehamn med avgång kl 19.30`
       };
       
       setMessages(prevMessages => [...prevMessages, fromHereMessage]);
