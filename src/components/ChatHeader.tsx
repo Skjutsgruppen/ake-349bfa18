@@ -19,7 +19,7 @@ const ChatHeader = ({ isSidebarOpen = true }: ChatHeaderProps) => {
   }, []);
 
   const handleLogoClick = () => {
-    navigate('/');
+    navigate('/chat');
   };
 
   return (
