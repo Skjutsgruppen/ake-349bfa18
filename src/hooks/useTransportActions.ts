@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Message } from '@/hooks/useChat';
 import { ActionHandlerProps } from './actionTypes';
@@ -41,7 +40,7 @@ export const useTransportActions = ({
       setAwaitingSeatsInput(true);
     }, 1000);
   };
-
+  
   const handleToWorkClick = () => {
     // Reset chat if the function exists
     if (resetChat) resetChat();
@@ -55,7 +54,7 @@ export const useTransportActions = ({
     
     const userMessage: Message = {
       role: 'user',
-      content: 'Visa mig resa till jobbet.'
+      content: 'Visa mig resor till jobbet'
     };
     
     setMessages([userMessage]);
@@ -82,7 +81,7 @@ export const useTransportActions = ({
     
     const userMessage: Message = {
       role: 'user',
-      content: 'Visa mig resealternativ till hem.'
+      content: 'Visa mig resor som går hem till mig'
     };
     
     setMessages([userMessage]);
