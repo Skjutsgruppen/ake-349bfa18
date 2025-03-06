@@ -44,22 +44,22 @@ const Message = ({
         <MessageAvatar isAssistant={role === 'assistant'} />
         <div className={`flex-1 space-y-2 ${role === 'user' ? 'flex justify-end' : ''}`}>
           <div className={`${role === 'user' ? 'bg-gray-700/50 rounded-[20px] px-4 py-2 inline-block' : ''}`}>
-            <div className="message-content">
+            <div className={`message-content ${role === 'assistant' ? 'bg-gray-800/50 rounded-[20px] px-4 py-3' : ''}`}>
               {formatContent(content)}
+              
+              {role === 'assistant' && showRouteSteps && routeSteps && (
+                <div className="mt-4">
+                  <StepByStepRoute steps={routeSteps} />
+                </div>
+              )}
+              
+              {role === 'assistant' && showCombinationRoute && combinationSteps && (
+                <div className="mt-4">
+                  <h3 className="text-xl font-medium mb-4">Här är ett kombinationsalternativ:</h3>
+                  <CombinationRoute steps={combinationSteps} />
+                </div>
+              )}
             </div>
-            
-            {role === 'assistant' && showRouteSteps && routeSteps && (
-              <div className="mt-4">
-                <StepByStepRoute steps={routeSteps} />
-              </div>
-            )}
-            
-            {role === 'assistant' && showCombinationRoute && combinationSteps && (
-              <div className="mt-4">
-                <h3 className="text-xl font-medium mb-4">Här är ett kombinationsalternativ:</h3>
-                <CombinationRoute steps={combinationSteps} />
-              </div>
-            )}
             
             {role === 'assistant' && <MessageActions />}
           </div>

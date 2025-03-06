@@ -1,8 +1,6 @@
 
 import Message from './Message';
 import TravelOption from './TravelOption';
-import StepByStepRoute from './StepByStepRoute';
-import CombinationRoute from './CombinationRoute';
 import CalendarInfo from './CalendarInfo';
 
 type Message = {
