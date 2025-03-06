@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Message from './Message';
 import { Message as MessageType } from '@/hooks/useChat';
 
@@ -22,6 +22,15 @@ const MessageList: React.FC<MessageListProps> = ({
   onAssociationActivityClick,
   onToHomeClick
 }) => {
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   return (
     <div className="mx-auto max-w-3xl px-4">
       {messages.map((message, index) => (
@@ -39,6 +48,8 @@ const MessageList: React.FC<MessageListProps> = ({
           onToHomeClick={onToHomeClick}
         />
       ))}
+      {/* This empty div serves as a scroll target */}
+      <div ref={bottomRef} />
     </div>
   );
 };
