@@ -22,15 +22,13 @@ const Welcome = () => {
       return;
     }
 
-    // In a real app, we would store the name to state or context
-    // For now, we'll just navigate to the chat
     localStorage.setItem('userName', name);
     navigate('/chat');
   };
 
   return (
     <div className="flex h-screen items-center justify-center bg-chatgpt-main p-4">
-      <div className="w-full max-w-md space-y-6 rounded-lg p-8">
+      <div className="w-full max-w-md rounded-lg border border-white/20 bg-chatgpt-main p-8">
         <div className="text-center">
           <h1 className="mb-6 text-4xl font-bold text-white">Hej!</h1>
           <p className="mb-8 text-lg text-gray-300">
@@ -49,7 +47,7 @@ const Welcome = () => {
               onChange={(e) => setName(e.target.value)}
               maxLength={15}
               placeholder="Ange ditt namn"
-              className="bg-[#2F2F2F] border-none text-white"
+              className="bg-[#2F2F2F] border-white/20 text-white"
               required
             />
           </div>
