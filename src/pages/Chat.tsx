@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +21,7 @@ const Chat = () => {
   const [userName, setUserName] = useState('');
   const [awaitingSeatsInput, setAwaitingSeatsInput] = useState(false);
   const [showTravelOptions, setShowTravelOptions] = useState(false);
+  const [showAssociationMap, setShowAssociationMap] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -37,6 +39,7 @@ const Chat = () => {
     setMessages([]);
     setAwaitingSeatsInput(false);
     setShowTravelOptions(false);
+    setShowAssociationMap(false);
   };
 
   const toggleSidebar = () => {
@@ -46,6 +49,7 @@ const Chat = () => {
   const handleOfferSeatClick = () => {
     setIsLoading(true);
     setShowTravelOptions(false);
+    setShowAssociationMap(false);
     
     const userMessage: Message = {
       role: 'user',
@@ -69,6 +73,7 @@ const Chat = () => {
   const handleToWorkClick = () => {
     setIsLoading(true);
     setAwaitingSeatsInput(false);
+    setShowAssociationMap(false);
     
     const hours = "19";
     const minutes = "07";
@@ -95,6 +100,7 @@ const Chat = () => {
   const handleFromHereClick = () => {
     setIsLoading(true);
     setShowTravelOptions(false);
+    setShowAssociationMap(false);
     
     const userMessage: Message = {
       role: 'user',
@@ -120,9 +126,33 @@ const Chat = () => {
     }, 1000);
   };
 
+  const handleAssociationActivityClick = () => {
+    setIsLoading(true);
+    setShowTravelOptions(false);
+    setShowAssociationMap(true);
+    
+    const userMessage: Message = {
+      role: 'user',
+      content: 'Visa mig information om föreningsaktivitet.'
+    };
+    
+    setMessages([userMessage]);
+    
+    setTimeout(() => {
+      const associationMessage: Message = {
+        role: 'assistant',
+        content: `Så kul! Ska ni till Scoutgården i Apelhult igen?`
+      };
+      
+      setMessages(prevMessages => [...prevMessages, associationMessage]);
+      setIsLoading(false);
+    }, 1000);
+  };
+
   const handleAnalysisClick = () => {
     setIsLoading(true);
     setShowTravelOptions(false);
+    setShowAssociationMap(false);
     
     const userMessage: Message = {
       role: 'user',
@@ -194,6 +224,7 @@ Vill du att vi går vidare med någon av dessa?`
 
       setMessages([...newMessages, assistantMessage]);
       setShowTravelOptions(false);
+      setShowAssociationMap(false);
     } catch (error: any) {
       toast({
         title: "Fel",
@@ -229,6 +260,7 @@ Vill du att vi går vidare med någon av dessa?`
                 onOfferSeatClick={handleOfferSeatClick}
                 onToWorkClick={handleToWorkClick}
                 onFromHereClick={handleFromHereClick}
+                onAssociationActivityClick={handleAssociationActivityClick}
               />
             </div>
           ) : (
@@ -254,6 +286,30 @@ Vill du att vi går vidare med någon av dessa?`
                         description="Från Borås C till Göteborg C kl 07.00. Filippa från Friluftsfrämjandet."
                         mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2131.8453814670745!2d12.930329577113534!3d57.72124517502991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465aa0873a5efbcb%3A0xd02cc1aca5728a2f!2sBor%C3%A5s%20C!5e0!3m2!1ssv!2sse!4v1714572046398!5m2!1ssv!2sse"
                       />
+                    </div>
+                  </div>
+                )}
+
+                {showAssociationMap && (
+                  <div className="w-full max-w-3xl mx-auto px-4 py-4">
+                    <div className="bg-gray-800/50 rounded-lg p-4 mb-4 mx-auto max-w-md">
+                      <div className="relative w-full h-64 overflow-hidden rounded-md mb-3">
+                        <iframe 
+                          src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d133999.46764172407!2d12.629131499999999!3d57.642073400000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x465aa767a79be4b5%3A0x8d5de1841af730d7!2sOrkesterv%C3%A4gen%2C%20Bor%C3%A5s!3m2!1d57.72343!2d12.8946699!4m5!1s0x46500531216f1b07%3A0xdda2c3d4949082d6!2sScoutg%C3%A5rden%20Apelhult%2C%20Apelhultsv%C3%A4gen%2030%2C%20511%2070%20Rydal!3m2!1d57.5623101!2d12.6620986!5m1!1e2!5m1!1e2"
+                          className="absolute top-0 left-0 w-full h-full border-0"
+                          allowFullScreen
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade"
+                          title="Karta till Scoutgården Apelhult"
+                        ></iframe>
+                      </div>
+                      <div className="flex justify-end">
+                        <button 
+                          className="border border-gray-600 hover:bg-gray-700 text-gray-200 px-4 py-2 rounded-full"
+                        >
+                          Välj
+                        </button>
+                      </div>
                     </div>
                   </div>
                 )}
