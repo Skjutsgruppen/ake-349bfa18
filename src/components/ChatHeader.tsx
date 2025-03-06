@@ -1,6 +1,7 @@
 
 import { Menu } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 interface ChatHeaderProps {
   isSidebarOpen?: boolean;
@@ -8,7 +9,15 @@ interface ChatHeaderProps {
 
 const ChatHeader = ({ isSidebarOpen = true }: ChatHeaderProps) => {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
   
+  useEffect(() => {
+    const savedName = localStorage.getItem('userName');
+    if (savedName) {
+      setUserName(savedName);
+    }
+  }, []);
+
   const handleLogoClick = () => {
     navigate('/');
   };
@@ -28,7 +37,7 @@ const ChatHeader = ({ isSidebarOpen = true }: ChatHeaderProps) => {
           </span>
         </div>
         <div className="flex items-center gap-2 text-sm">
-          <span className="font-medium">Birgit, Scouterna</span>
+          <span className="font-medium">{userName}, Scouterna</span>
         </div>
       </div>
     </div>

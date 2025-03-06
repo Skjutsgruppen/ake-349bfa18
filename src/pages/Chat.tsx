@@ -17,7 +17,7 @@ const Chat = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [userName, setUserName] = useState('Birgit');
+  const [userName, setUserName] = useState('');
   const { toast } = useToast();
   const navigate = useNavigate();
 

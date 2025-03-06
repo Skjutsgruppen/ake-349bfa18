@@ -1,7 +1,8 @@
+
 const MessageAvatar = ({ isAssistant }: { isAssistant: boolean }) => {
   if (isAssistant) {
     return (
-      <div className="relative flex h-full items-center justify-center rounded-full bg-[#00aeef] text-white">
+      <div className="relative h-8 w-8 flex items-center justify-center rounded-full bg-[#00aeef] text-white">
         {/* Blue circle for Åke avatar */}
       </div>
     );
