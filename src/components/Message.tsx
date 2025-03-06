@@ -3,7 +3,11 @@ import MessageAvatar from './MessageAvatar';
 import MessageActions from './MessageActions';
 import StepByStepRoute from './StepByStepRoute';
 import ActionButtons from './ActionButtons';
-import { useActionHandlers } from '@/hooks/useActionHandlers';
+import { ActionHandlerProps } from '@/hooks/actionTypes';
+import { useTransportActions } from '@/hooks/useTransportActions';
+import { useLocationActions } from '@/hooks/useLocationActions';
+import { useAnalyticsActions } from '@/hooks/useAnalyticsActions';
+import { useSocialActions } from '@/hooks/useSocialActions';
 
 type MessageProps = {
   role: 'user' | 'assistant';
@@ -13,15 +17,8 @@ type MessageProps = {
 };
 
 const Message = ({ role, content, includeRouteSteps, showActionButtons }: MessageProps) => {
-  // Get action handlers
-  const { 
-    handleAnalysisClick,
-    handleOfferSeatClick,
-    handleToWorkClick,
-    handleFromHereClick,
-    handleAssociationActivityClick,
-    handleToHomeClick
-  } = useActionHandlers({
+  // Define empty handlers for the Message component actions
+  const actionProps: ActionHandlerProps = {
     setMessages: () => {},
     setIsLoading: () => {},
     setAwaitingSeatsInput: () => {},
@@ -30,7 +27,13 @@ const Message = ({ role, content, includeRouteSteps, showActionButtons }: Messag
     setShowRouteSteps: () => {},
     setShowCombinationRoute: () => {},
     setShowCalendarInfo: () => {}
-  });
+  };
+
+  // Get action handlers
+  const { handleOfferSeatClick, handleToWorkClick, handleToHomeClick } = useTransportActions(actionProps);
+  const { handleFromHereClick } = useLocationActions(actionProps);
+  const { handleAnalysisClick } = useAnalyticsActions(actionProps);
+  const { handleAssociationActivityClick } = useSocialActions(actionProps);
 
   // Define the steps for the route
   const routeSteps = [{
