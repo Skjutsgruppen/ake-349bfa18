@@ -11,6 +11,14 @@ import { Message } from '@/hooks/useChat';
 type TransportStep = {
   type: 'walk' | 'bus' | 'carpool';
   description: string;
+  title?: string;
+};
+
+type RouteStep = {
+  type: 'bus' | 'carpool' | 'walk';
+  title: string;
+  description: string;
+  mapUrl?: string;
 };
 
 interface ChatContentProps {
@@ -38,18 +46,22 @@ const ChatContent: React.FC<ChatContentProps> = ({
   const routeSteps = [
     {
       type: 'walk' as const,
+      title: 'Promenad',
       description: 'Gå 5 minuter till Bollebygd Centrum (350m)'
     },
     {
       type: 'bus' as const,
+      title: 'Buss',
       description: 'Ta buss 101 mot Borås kl 19:15'
     },
     {
       type: 'carpool' as const,
+      title: 'Samåkning',
       description: 'Byt vid Borås Resecentrum till samåkning med Erika som kör till Sjöbo kl 19:45'
     },
     {
       type: 'walk' as const,
+      title: 'Promenad',
       description: 'Promenad sista 400m till Orkestervägen (5 min)'
     }
   ];

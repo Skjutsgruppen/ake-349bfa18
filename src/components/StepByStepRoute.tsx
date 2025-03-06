@@ -5,6 +5,7 @@ import { PersonStanding, Bus, Car } from 'lucide-react';
 type TransportStep = {
   type: 'walk' | 'bus' | 'carpool';
   description: string;
+  title?: string;
 };
 
 interface StepByStepRouteProps {
@@ -32,7 +33,10 @@ const StepByStepRoute: React.FC<StepByStepRouteProps> = ({ steps }) => {
           <div className="bg-gray-800/50 rounded-xl p-4 w-full shadow-md">
             <div className="flex items-center">
               {getIcon(step.type)}
-              <span className="ml-2">{step.description}</span>
+              <span className="ml-2">
+                {step.title && <strong>{step.title}: </strong>}
+                {step.description}
+              </span>
             </div>
           </div>
           
