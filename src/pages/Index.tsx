@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import Sidebar from '@/components/Sidebar';
@@ -95,7 +94,10 @@ const Index = () => {
                 <h1 className="mb-8 text-4xl font-semibold text-center">Hej Birgit!</h1>
                 <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
               </div>
-              <ActionButtons />
+              <ActionButtons 
+                onAnalysisClick={() => {}}
+                onOfferSeatClick={() => {}}
+              />
             </div>
           ) : (
             <>

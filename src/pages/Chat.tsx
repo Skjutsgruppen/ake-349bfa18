@@ -121,7 +121,7 @@ Vill du att vi går vidare med någon av dessa?`
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      let response = "Jag förstår inte riktigt din fråga. Kan du försöka omformulera den?";
+      let response = "Jag är bara en prototyp än så länge, så jag kan inte chatta längre än så här";
       
       // Handle continuation of "Erbjud plats" flow
       if (awaitingSeatsInput) {
