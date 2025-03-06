@@ -65,7 +65,10 @@ const Sidebar = ({ isOpen, onToggle, onApiKeyChange, resetChat }: SidebarProps) 
       )}
       style={{ width: `${sidebarWidth}px` }}
     >
-      <nav className="flex h-full w-full flex-col px-3" aria-label="Chatthistorik">
+      <nav className={cn(
+        "flex h-full w-full flex-col px-3",
+        isOpen ? "" : "overflow-hidden"
+      )} aria-label="Chatthistorik">
         <div className="flex justify-between flex h-[60px] items-center">
           <button onClick={onToggle} className="h-10 rounded-lg px-2 text-token-text-secondary hover:bg-token-sidebar-surface-secondary">
             <Menu className="h-5 w-5" />
@@ -77,7 +80,10 @@ const Sidebar = ({ isOpen, onToggle, onApiKeyChange, resetChat }: SidebarProps) 
           )}
         </div>
 
-        <div className="flex-col flex-1 transition-opacity duration-500 relative -mr-2 pr-2 overflow-y-auto">
+        <div className={cn(
+          "flex-col flex-1 transition-opacity duration-500 relative -mr-2 pr-2",
+          isOpen ? "overflow-y-auto" : "overflow-hidden"
+        )}>
           {isOpen && (
             <div className="p-2 mb-4">
               <div className="flex items-center gap-2 mb-2">
@@ -94,35 +100,37 @@ const Sidebar = ({ isOpen, onToggle, onApiKeyChange, resetChat }: SidebarProps) 
             </div>
           )}
 
-          <div className="bg-token-sidebar-surface-primary pt-0">
-            <div className="flex flex-col gap-2 px-2 py-2">
-              <div className="group flex h-10 items-center gap-2.5 rounded-lg px-2 hover:bg-token-sidebar-surface-secondary cursor-pointer">
-                <div className="h-6 w-6 flex items-center justify-center">
-                  <Car className="h-4 w-4" />
+          {isOpen && (
+            <div className="bg-token-sidebar-surface-primary pt-0">
+              <div className="flex flex-col gap-2 px-2 py-2">
+                <div className="group flex h-10 items-center gap-2.5 rounded-lg px-2 hover:bg-token-sidebar-surface-secondary cursor-pointer">
+                  <div className="h-6 w-6 flex items-center justify-center">
+                    <Car className="h-4 w-4" />
+                  </div>
+                  <span className="text-sm">Samåkning</span>
                 </div>
-                <span className="text-sm">Samåkning</span>
-              </div>
-              <div className="group flex h-10 items-center gap-2.5 rounded-lg px-2 hover:bg-token-sidebar-surface-secondary cursor-pointer">
-                <div className="h-6 w-6 flex items-center justify-center">
-                  <Bus className="h-4 w-4" />
+                <div className="group flex h-10 items-center gap-2.5 rounded-lg px-2 hover:bg-token-sidebar-surface-secondary cursor-pointer">
+                  <div className="h-6 w-6 flex items-center justify-center">
+                    <Bus className="h-4 w-4" />
+                  </div>
+                  <span className="text-sm">Kollektivtrafik</span>
                 </div>
-                <span className="text-sm">Kollektivtrafik</span>
               </div>
-            </div>
 
-            <div className="mt-4 flex flex-col gap-4">
-              {timeframes.map((timeframe) => (
-                <div key={timeframe.title}>
-                  <div className="px-3 py-2 text-xs text-gray-500">{timeframe.title}</div>
-                  {timeframe.items.map((item) => (
-                    <div key={item} className="group flex h-10 items-center gap-2.5 rounded-lg px-2 hover:bg-token-sidebar-surface-secondary cursor-pointer">
-                      <span className="text-sm">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              ))}
+              <div className="mt-4 flex flex-col gap-4">
+                {timeframes.map((timeframe) => (
+                  <div key={timeframe.title}>
+                    <div className="px-3 py-2 text-xs text-gray-500">{timeframe.title}</div>
+                    {timeframe.items.map((item) => (
+                      <div key={item} className="group flex h-10 items-center gap-2.5 rounded-lg px-2 hover:bg-token-sidebar-surface-secondary cursor-pointer">
+                        <span className="text-sm">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </nav>
     </div>
