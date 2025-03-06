@@ -1,6 +1,7 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '@/components/Sidebar';
 import ChatHeader from '@/components/ChatHeader';
 import ChatInput from '@/components/ChatInput';
@@ -12,11 +13,23 @@ type Message = {
   content: string;
 };
 
-const Index = () => {
+const Chat = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [userName, setUserName] = useState('Birgit');
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedName = localStorage.getItem('userName');
+    if (savedName) {
+      setUserName(savedName);
+    } else {
+      // Redirect to welcome page if no name is set
+      navigate('/');
+    }
+  }, [navigate]);
 
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) {
@@ -51,7 +64,7 @@ const Index = () => {
       } else if (content.toLowerCase().includes("kombination") || content.toLowerCase().includes("både och")) {
         response = "För en kombinerad resa rekommenderar jag att ta samåkning till Korsvägen och sedan buss 50 till ditt slutmål. Detta sparar både tid och pengar samtidigt som det minskar miljöpåverkan!";
       } else if (content.toLowerCase().includes("hej") || content.toLowerCase().includes("hallå")) {
-        response = "Hej! Jag är Åke, din reseassistent. Jag kan hjälpa dig med både kollektivtrafik via Västtrafik och samåkning via Skjutsgruppen. Vad behöver du hjälp med idag?";
+        response = `Hej ${userName}! Jag är Åke, din reseassistent. Jag kan hjälpa dig med både kollektivtrafik via Västtrafik och samåkning via Skjutsgruppen. Vad behöver du hjälp med idag?`;
       }
 
       const assistantMessage: Message = {
@@ -76,7 +89,7 @@ const Index = () => {
       <Sidebar 
         isOpen={isSidebarOpen} 
         onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
-        onApiKeyChange={() => {}} // Empty function since we don't need API key anymore
+        onApiKeyChange={() => {}}
       />
       
       <main className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
@@ -86,7 +99,7 @@ const Index = () => {
           {messages.length === 0 ? (
             <div className="w-full max-w-3xl px-4 space-y-4">
               <div>
-                <h1 className="mb-8 text-4xl font-semibold text-center">Hej Birgit!</h1>
+                <h1 className="mb-8 text-4xl font-semibold text-center">Hej {userName}!</h1>
                 <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
               </div>
               <ActionButtons />
@@ -108,4 +121,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Chat;
