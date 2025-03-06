@@ -6,10 +6,14 @@ export const useAnalyticsActions = ({
   setMessages,
   setIsLoading,
   setShowTravelOptions,
-  setShowAssociationMap
+  setShowAssociationMap,
+  resetChat
 }: ActionHandlerProps) => {
 
   const handleAnalysisClick = () => {
+    // Reset chat if the function exists
+    if (resetChat) resetChat();
+    
     setIsLoading(true);
     setShowTravelOptions(false);
     setShowAssociationMap(false);

@@ -7,10 +7,14 @@ export const useSocialActions = ({
   setIsLoading,
   setShowTravelOptions,
   setShowAssociationMap,
-  setShowCalendarInfo
+  setShowCalendarInfo,
+  resetChat
 }: ActionHandlerProps) => {
 
   const handleAssociationActivityClick = () => {
+    // Reset chat if the function exists
+    if (resetChat) resetChat();
+    
     setIsLoading(true);
     setShowTravelOptions(false);
     setShowAssociationMap(false);

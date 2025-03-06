@@ -11,10 +11,14 @@ export const useTransportActions = ({
   setShowAssociationMap,
   setShowRouteSteps,
   setShowCombinationRoute,
-  setShowCalendarInfo
+  setShowCalendarInfo,
+  resetChat
 }: ActionHandlerProps) => {
   
   const handleOfferSeatClick = () => {
+    // Reset chat if the function exists
+    if (resetChat) resetChat();
+    
     setIsLoading(true);
     setShowTravelOptions(false);
     setShowAssociationMap(false);
@@ -39,6 +43,9 @@ export const useTransportActions = ({
   };
 
   const handleToWorkClick = () => {
+    // Reset chat if the function exists
+    if (resetChat) resetChat();
+    
     setIsLoading(true);
     setAwaitingSeatsInput(false);
     setShowAssociationMap(false);
@@ -66,6 +73,9 @@ export const useTransportActions = ({
   };
 
   const handleToHomeClick = () => {
+    // Reset chat if the function exists
+    if (resetChat) resetChat();
+    
     setIsLoading(true);
     setShowTravelOptions(false);
     setShowAssociationMap(false);

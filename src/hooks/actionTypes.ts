@@ -10,4 +10,5 @@ export interface ActionHandlerProps {
   setShowRouteSteps: (show: boolean) => void;
   setShowCombinationRoute: (show: boolean) => void;
   setShowCalendarInfo: (show: boolean) => void;
+  resetChat?: () => void;
 }

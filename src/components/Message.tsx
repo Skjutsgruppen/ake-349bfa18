@@ -8,6 +8,7 @@ import { useTransportActions } from '@/hooks/useTransportActions';
 import { useLocationActions } from '@/hooks/useLocationActions';
 import { useAnalyticsActions } from '@/hooks/useAnalyticsActions';
 import { useSocialActions } from '@/hooks/useSocialActions';
+import { useChat } from '@/hooks/useChat';
 
 type MessageProps = {
   role: 'user' | 'assistant';
@@ -17,19 +18,24 @@ type MessageProps = {
 };
 
 const Message = ({ role, content, includeRouteSteps, showActionButtons }: MessageProps) => {
-  // Define empty handlers for the Message component actions
+  // Get the reset function from useChat
+  const { resetChat, setMessages, setIsLoading, setAwaitingSeatsInput, setShowTravelOptions, 
+         setShowAssociationMap, setShowRouteSteps, setShowCombinationRoute, setShowCalendarInfo } = useChat();
+  
+  // Define action props with the actual state setters from useChat
   const actionProps: ActionHandlerProps = {
-    setMessages: () => {},
-    setIsLoading: () => {},
-    setAwaitingSeatsInput: () => {},
-    setShowTravelOptions: () => {},
-    setShowAssociationMap: () => {},
-    setShowRouteSteps: () => {},
-    setShowCombinationRoute: () => {},
-    setShowCalendarInfo: () => {}
+    setMessages,
+    setIsLoading,
+    setAwaitingSeatsInput,
+    setShowTravelOptions,
+    setShowAssociationMap,
+    setShowRouteSteps,
+    setShowCombinationRoute,
+    setShowCalendarInfo,
+    resetChat
   };
 
-  // Get action handlers
+  // Get action handlers with the updated props
   const { handleOfferSeatClick, handleToWorkClick, handleToHomeClick } = useTransportActions(actionProps);
   const { handleFromHereClick } = useLocationActions(actionProps);
   const { handleAnalysisClick } = useAnalyticsActions(actionProps);

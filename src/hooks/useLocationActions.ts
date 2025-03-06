@@ -7,10 +7,14 @@ export const useLocationActions = ({
   setIsLoading,
   setShowTravelOptions,
   setShowAssociationMap,
-  setShowRouteSteps
+  setShowRouteSteps,
+  resetChat
 }: ActionHandlerProps) => {
 
   const handleFromHereClick = () => {
+    // Reset chat if the function exists
+    if (resetChat) resetChat();
+    
     setIsLoading(true);
     setShowTravelOptions(false);
     setShowAssociationMap(false);
