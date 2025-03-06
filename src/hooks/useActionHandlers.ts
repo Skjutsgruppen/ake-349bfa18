@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Message } from '@/hooks/useChat';
 
@@ -10,6 +9,7 @@ interface ActionHandlersProps {
   setShowAssociationMap: (show: boolean) => void;
   setShowRouteSteps: (show: boolean) => void;
   setShowCombinationRoute: (show: boolean) => void;
+  setShowCalendarInfo: (show: boolean) => void;
 }
 
 export const useActionHandlers = ({
@@ -19,7 +19,8 @@ export const useActionHandlers = ({
   setShowTravelOptions,
   setShowAssociationMap,
   setShowRouteSteps,
-  setShowCombinationRoute
+  setShowCombinationRoute,
+  setShowCalendarInfo
 }: ActionHandlersProps) => {
   const [userName, setUserName] = useState('');
 
@@ -113,7 +114,8 @@ export const useActionHandlers = ({
   const handleAssociationActivityClick = () => {
     setIsLoading(true);
     setShowTravelOptions(false);
-    setShowAssociationMap(true);
+    setShowAssociationMap(false);
+    setShowCalendarInfo(true);
     
     const userMessage: Message = {
       role: 'user',
@@ -125,7 +127,7 @@ export const useActionHandlers = ({
     setTimeout(() => {
       const associationMessage: Message = {
         role: 'assistant',
-        content: `Så kul! Ska ni till Scoutgården i Apelhult igen?`
+        content: `Jag ser i din kalender att ni har Scoutmöte på Scoutgården i Apelhult imorgon. Vill du se vilka resealternativ som finns dit?`
       };
       
       setMessages(prevMessages => [...prevMessages, associationMessage]);

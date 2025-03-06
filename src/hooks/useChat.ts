@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -15,6 +14,7 @@ export const useChat = () => {
   const [showAssociationMap, setShowAssociationMap] = useState(false);
   const [showRouteSteps, setShowRouteSteps] = useState(false);
   const [showCombinationRoute, setShowCombinationRoute] = useState(false);
+  const [showCalendarInfo, setShowCalendarInfo] = useState(false);
   const { toast } = useToast();
 
   const resetChat = () => {
@@ -25,6 +25,7 @@ export const useChat = () => {
     setShowAssociationMap(false);
     setShowRouteSteps(false);
     setShowCombinationRoute(false);
+    setShowCalendarInfo(false);
   };
 
   const handleSendMessage = async (content: string) => {
@@ -92,6 +93,7 @@ export const useChat = () => {
     showAssociationMap,
     showRouteSteps,
     showCombinationRoute,
+    showCalendarInfo,
     setMessages,
     setIsLoading,
     setAwaitingSeatsInput,
@@ -99,6 +101,7 @@ export const useChat = () => {
     setShowAssociationMap,
     setShowRouteSteps,
     setShowCombinationRoute,
+    setShowCalendarInfo,
     resetChat,
     handleSendMessage
   };

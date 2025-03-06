@@ -4,6 +4,7 @@ import MessageList from './MessageList';
 import TravelOption from './TravelOption';
 import StepByStepRoute from './StepByStepRoute';
 import CombinationRoute from './CombinationRoute';
+import CalendarInfo from './CalendarInfo';
 import ChatInput from './ChatInput';
 import { Message } from '@/hooks/useChat';
 
@@ -19,6 +20,7 @@ interface ChatContentProps {
   showAssociationMap: boolean;
   showRouteSteps: boolean;
   showCombinationRoute: boolean;
+  showCalendarInfo: boolean;
   onSendMessage: (message: string) => void;
 }
 
@@ -29,6 +31,7 @@ const ChatContent: React.FC<ChatContentProps> = ({
   showAssociationMap,
   showRouteSteps,
   showCombinationRoute,
+  showCalendarInfo,
   onSendMessage
 }) => {
   // Define the steps for the route
@@ -118,6 +121,12 @@ const ChatContent: React.FC<ChatContentProps> = ({
                 </button>
               </div>
             </div>
+          </div>
+        )}
+        
+        {showCalendarInfo && (
+          <div className="w-full max-w-3xl mx-auto px-4 py-4">
+            <CalendarInfo />
           </div>
         )}
         

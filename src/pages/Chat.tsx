@@ -18,6 +18,7 @@ const Chat = () => {
     showAssociationMap, 
     showRouteSteps,
     showCombinationRoute,
+    showCalendarInfo,
     setMessages,
     setIsLoading,
     setAwaitingSeatsInput,
@@ -25,6 +26,7 @@ const Chat = () => {
     setShowAssociationMap,
     setShowRouteSteps,
     setShowCombinationRoute,
+    setShowCalendarInfo,
     resetChat, 
     handleSendMessage 
   } = useChat();
@@ -46,7 +48,8 @@ const Chat = () => {
     setShowTravelOptions,
     setShowAssociationMap,
     setShowRouteSteps,
-    setShowCombinationRoute
+    setShowCombinationRoute,
+    setShowCalendarInfo
   });
 
   useEffect(() => {
@@ -89,6 +92,7 @@ const Chat = () => {
               showAssociationMap={showAssociationMap}
               showRouteSteps={showRouteSteps}
               showCombinationRoute={showCombinationRoute}
+              showCalendarInfo={showCalendarInfo}
               onSendMessage={handleSendMessage}
             />
           )}
