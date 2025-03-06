@@ -22,16 +22,17 @@ const Welcome = () => {
       return;
     }
 
-    // In a real app, we would store the name to state or context
-    // For now, we'll just navigate to the chat
     localStorage.setItem('userName', name);
     navigate('/chat');
   };
 
   return (
     <div className="flex h-screen items-center justify-center bg-chatgpt-main p-4">
-      <div className="w-full max-w-md space-y-6 rounded-lg p-8">
+      <div className="w-full max-w-md space-y-6 rounded-xl border border-gray-700 bg-[#2A2B32] p-8 shadow-lg">
         <div className="text-center">
+          <div className="mx-auto mb-6 h-16 w-16 flex items-center justify-center rounded-full bg-[#00aeef]">
+            {/* Empty circle */}
+          </div>
           <h1 className="mb-6 text-4xl font-bold text-white">Hej!</h1>
           <p className="mb-8 text-lg text-gray-300">
             Det här en prototyp av "Åke" - en unik AI-reseplanerare. I det här testscenariot är du medlem i Scouterna, bor i Borås och jobbar på Volvo.
@@ -49,14 +50,14 @@ const Welcome = () => {
               onChange={(e) => setName(e.target.value)}
               maxLength={15}
               placeholder="Ange ditt namn"
-              className="bg-[#2F2F2F] border-none text-white"
+              className="rounded-lg bg-[#3A3B42] border-gray-700 text-white"
               required
             />
           </div>
           
           <Button 
             type="submit" 
-            className="w-full rounded-full bg-[#00aeef] py-3 text-white hover:bg-[#0088bb]"
+            className="w-full rounded-xl border border-transparent bg-[#00aeef] py-3 text-white hover:bg-[#0088bb] hover:border-gray-600 transition-all duration-300"
           >
             Testa
           </Button>
