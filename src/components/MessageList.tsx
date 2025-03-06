@@ -9,8 +9,8 @@ type Message = {
 
 const MessageList = ({ messages }: { messages: Message[] }) => {
   return (
-    <div className="flex-1 overflow-auto">
-      <div className="w-full max-w-3xl mx-auto px-4 py-2">
+    <div className="flex-1 overflow-y-auto">
+      <div className="w-full max-w-3xl mx-auto px-4">
         {messages.map((message, index) => (
           <Message key={index} {...message} />
         ))}
