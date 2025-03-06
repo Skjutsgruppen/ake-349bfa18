@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 
 interface ChatHeaderProps {
   isSidebarOpen?: boolean;
+  toggleSidebar?: () => void;
   resetChat: () => void;
 }
 
-const ChatHeader = ({ isSidebarOpen = true, resetChat }: ChatHeaderProps) => {
+const ChatHeader = ({ isSidebarOpen = true, toggleSidebar, resetChat }: ChatHeaderProps) => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   
@@ -27,9 +28,10 @@ const ChatHeader = ({ isSidebarOpen = true, resetChat }: ChatHeaderProps) => {
     <div className="fixed top-0 z-30 w-full border-b border-white/20 bg-chatgpt-main/95 backdrop-blur">
       <div className="flex h-[60px] items-center justify-between px-4">
         <div className="flex items-center gap-4">
-          {!isSidebarOpen && (
-            <Menu className="h-5 w-5 cursor-pointer" onClick={handleReset} />
-          )}
+          <Menu 
+            className="h-5 w-5 cursor-pointer" 
+            onClick={toggleSidebar} 
+          />
           <span 
             className="font-semibold cursor-pointer"
             onClick={handleReset}

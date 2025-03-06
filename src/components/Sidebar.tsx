@@ -1,7 +1,8 @@
+
 import { Menu, Globe, ChevronDown, Clock, Car, Bus, Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -12,6 +13,18 @@ interface SidebarProps {
 
 const Sidebar = ({ isOpen, onToggle, onApiKeyChange, resetChat }: SidebarProps) => {
   const [apiKey, setApiKey] = useState("");
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  
+  // Track window size for responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   const timeframes = [
     { title: "Igår", items: ["Kollektivtrafik till Göteborg"] },
     { 
@@ -40,12 +53,18 @@ const Sidebar = ({ isOpen, onToggle, onApiKeyChange, resetChat }: SidebarProps) 
     setApiKey(newApiKey);
     onApiKeyChange(newApiKey);
   };
+  
+  // Calculate sidebar width based on screen size and isOpen state
+  const sidebarWidth = isOpen ? (screenWidth < 768 ? screenWidth * 0.8 : 256) : 0;
 
   return (
-    <div className={cn(
-      "fixed top-0 left-0 z-40 h-screen bg-chatgpt-sidebar transition-all duration-300",
-      isOpen ? "w-64" : "w-0"
-    )}>
+    <div 
+      className={cn(
+        "fixed top-0 left-0 z-40 h-screen bg-chatgpt-sidebar transition-all duration-300",
+        isOpen ? "" : "w-0"
+      )}
+      style={{ width: `${sidebarWidth}px` }}
+    >
       <nav className="flex h-full w-full flex-col px-3" aria-label="Chatthistorik">
         <div className="flex justify-between flex h-[60px] items-center">
           <button onClick={onToggle} className="h-10 rounded-lg px-2 text-token-text-secondary hover:bg-token-sidebar-surface-secondary">

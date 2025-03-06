@@ -37,6 +37,10 @@ const Chat = () => {
     setMessages([]);
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) {
       toast({
@@ -91,18 +95,18 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       <Sidebar 
         isOpen={isSidebarOpen} 
-        onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        onToggle={toggleSidebar}
         onApiKeyChange={() => {}}
         resetChat={resetChat}
       />
       
-      <main className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
-        <ChatHeader isSidebarOpen={isSidebarOpen} resetChat={resetChat} />
+      <main className={`flex-1 transition-all duration-300 ${isSidebarOpen ? 'ml-64 md:ml-64' : 'ml-0'} flex flex-col h-screen`}>
+        <ChatHeader isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} resetChat={resetChat} />
         
-        <div className={`flex h-full flex-col ${messages.length === 0 ? 'items-center justify-center' : 'justify-between'} pt-[60px] pb-4`}>
+        <div className={`flex h-full flex-col ${messages.length === 0 ? 'items-center justify-center' : 'justify-between'} pt-[60px] pb-4 overflow-hidden`}>
           {messages.length === 0 ? (
             <div className="w-full max-w-3xl px-4 space-y-4">
               <div>
@@ -113,7 +117,9 @@ const Chat = () => {
             </div>
           ) : (
             <>
-              <MessageList messages={messages} />
+              <div className="flex-1 overflow-y-auto">
+                <MessageList messages={messages} />
+              </div>
               <div className="w-full max-w-3xl mx-auto px-4 py-2">
                 <ChatInput onSend={handleSendMessage} isLoading={isLoading} />
               </div>
