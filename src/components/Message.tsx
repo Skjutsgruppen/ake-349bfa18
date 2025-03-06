@@ -85,14 +85,16 @@ const Message = ({ role, content, includeRouteSteps, showActionButtons }: Messag
                   </div>
                 )}
                 {showActionButtons && (
-                  <ActionButtons 
-                    onAnalysisClick={handleAnalysisClick}
-                    onOfferSeatClick={handleOfferSeatClick}
-                    onToWorkClick={handleToWorkClick}
-                    onFromHereClick={handleFromHereClick}
-                    onAssociationActivityClick={handleAssociationActivityClick}
-                    onToHomeClick={handleToHomeClick}
-                  />
+                  <div className="flex justify-start mt-4">
+                    <ActionButtons 
+                      onAnalysisClick={handleAnalysisClick}
+                      onOfferSeatClick={handleOfferSeatClick}
+                      onToWorkClick={handleToWorkClick}
+                      onFromHereClick={handleFromHereClick}
+                      onAssociationActivityClick={handleAssociationActivityClick}
+                      onToHomeClick={handleToHomeClick}
+                    />
+                  </div>
                 )}
               </div>
             ) : (
