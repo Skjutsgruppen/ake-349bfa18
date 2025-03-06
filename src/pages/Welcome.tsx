@@ -46,7 +46,7 @@ const Welcome = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               maxLength={15}
-              placeholder="Ange ditt namn"
+              placeholder="Ange förnamn"
               className="rounded-lg bg-[#3A3B42] border-gray-700 text-white"
               required
             />
